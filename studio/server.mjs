@@ -61,7 +61,9 @@ async function body(req) {
     req.headers['x-style-studio'] !== 'local' ||
     (req.headers.origin && req.headers.origin !== origin)
   )
-    throw Object.assign(new Error('Open the editor from its local address.'), { status: 403 });
+    throw Object.assign(new Error('Open the editor from its local address.'), {
+      status: 403,
+    });
   const chunks = [];
   let size = 0;
   for await (const chunk of req) {
@@ -105,7 +107,10 @@ const server = http.createServer(async (req, res) => {
         return reply(res, 409, {
           error: 'Another window saved this library. Export your draft as a backup, then reload.',
         });
-      const state = { revision: current.revision + 1, library: normalizeLibrary(input.library) };
+      const state = {
+        revision: current.revision + 1,
+        library: normalizeLibrary(input.library),
+      };
       fs.copyFileSync(libraryPath, path.join(dataRoot, 'library.previous.json'));
       const temporary = path.join(dataRoot, 'library.next.json');
       fs.writeFileSync(temporary, JSON.stringify(state, null, 2));
@@ -160,6 +165,10 @@ const server = http.createServer(async (req, res) => {
         'assets/design.css',
         fs.readFileSync(path.join(publicRoot, 'studio/theme.css')),
       ]);
+      entries.push([
+        'assets/design-typography.mjs',
+        fs.readFileSync(path.join(publicRoot, 'studio/typography.mjs')),
+      ]);
       project.pages.forEach((page, index) =>
         entries.push([
           pageFilename(page, index),
@@ -169,7 +178,12 @@ const server = http.createServer(async (req, res) => {
       entries.push([
         'design-recipe.json',
         JSON.stringify(
-          { kind: 'style-studio-project', version: 1, project, fonts: exportFonts },
+          {
+            kind: 'style-studio-project',
+            version: 1,
+            project,
+            fonts: exportFonts,
+          },
           null,
           2,
         ),
@@ -214,7 +228,10 @@ const server = http.createServer(async (req, res) => {
 });
 function openBrowser() {
   if (process.platform === 'win32')
-    spawn('cmd', ['/c', 'start', '', origin], { windowsHide: true, stdio: 'ignore' }).unref();
+    spawn('cmd', ['/c', 'start', '', origin], {
+      windowsHide: true,
+      stdio: 'ignore',
+    }).unref();
   else if (process.platform === 'darwin') spawn('open', [origin], { stdio: 'ignore' }).unref();
 }
 server.on('error', async (error) => {

@@ -10,6 +10,46 @@ html[data-design] body {
   font-size: var(--ds-font-size);
   line-height: var(--ds-line-height);
 }
+html[data-design][data-canvas-pattern='grid'] body {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ds-border) 15%, transparent) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ds-border) 15%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+html[data-design][data-canvas-pattern='dots'] body {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ds-border) 30%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+html[data-design][data-canvas-pattern='diagonal'] body {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 22px,
+    color-mix(in srgb, var(--ds-border) 10%, transparent) 22px 23px
+  );
+}
+html[data-design][data-canvas-pattern='bands'] body {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 120px,
+    color-mix(in srgb, var(--ds-surface) 38%, transparent) 120px 240px
+  );
+}
+html[data-design][data-canvas-pattern='crosshatch'] body {
+  background-image: linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--ds-border) 10%, transparent) 25%,
+    transparent 25% 75%,
+    color-mix(in srgb, var(--ds-border) 10%, transparent) 75%
+  );
+  background-size: 18px 18px;
+}
 html[data-design] ::selection {
   background: var(--ds-accent);
   color: var(--ds-onAccent);
@@ -26,8 +66,19 @@ html[data-design] :is(h1, h2, h3, h4) {
   font-family: var(--ds-heading-font);
   color: var(--ds-text);
   line-height: 1.15;
-  hyphens: auto;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  /* The original reduced-motion rule gives every element a tiny transition.
+     Font-size must settle immediately so long-word measurements stay accurate. */
+  transition-property: color, background-color, border-color;
   text-wrap: balance;
+}
+html[data-design] :is(h1, h2, h3, h4) * {
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  transition-property: color, background-color, border-color;
 }
 html[data-design]
   :is(p, li, label, legend, dt, dd, [class*='text-neutral'], [class*='text-white']) {
@@ -319,6 +370,81 @@ html[data-design] .project-grid {
   html[data-design][data-hero='center'] .profile-facts {
     margin-top: 0;
     text-align: left;
+  }
+  html[data-design][data-hero='banner'] .hero-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  html[data-design][data-hero='banner'] .hero-copy {
+    max-width: 960px;
+  }
+  html[data-design][data-hero='banner'] .hero-title {
+    font-size: clamp(3rem, 6.5vw, 5.4rem);
+  }
+  html[data-design][data-hero='banner'] .profile-aside {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+    max-width: 900px;
+  }
+  html[data-design][data-hero='banner'] .profile-facts {
+    margin: 0;
+  }
+  html[data-design][data-hero='portrait-led'] .hero-section {
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+  html[data-design][data-hero='portrait-led'] .profile-aside {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 420px;
+  }
+  html[data-design][data-hero='portrait-led'] .hero-copy {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 40px;
+  }
+  html[data-design][data-hero='compact'] .hero-section {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 32px;
+    padding-block: 36px;
+  }
+  html[data-design][data-hero='compact'] .hero-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+  }
+  html[data-design][data-hero='compact'] .profile-facts {
+    padding: 16px;
+  }
+  html[data-design][data-hero='magazine'] .hero-section {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 48px;
+    align-items: start;
+  }
+  html[data-design][data-hero='magazine'] .hero-copy {
+    border-top: 6px solid var(--ds-text);
+    padding-top: 24px;
+  }
+  html[data-design][data-hero='magazine'] .hero-title {
+    font-size: clamp(3rem, 5.5vw, 4.4rem);
+  }
+  html[data-design][data-hero='magazine'] .profile-aside {
+    border-left: 1px solid var(--ds-border);
+    padding-left: 24px;
+  }
+  html[data-design][data-hero='split-panel'] .hero-section {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+    gap: 40px;
+    align-items: stretch;
+  }
+  html[data-design][data-hero='split-panel'] .hero-copy {
+    background: var(--ds-surface);
+    border-radius: var(--ds-corner);
+    padding: clamp(24px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 @media (max-width: 767px) {

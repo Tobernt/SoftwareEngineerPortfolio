@@ -1,5 +1,8 @@
 import {
   RECIPES,
+  PALETTES,
+  COMPONENT_STYLES,
+  COMPONENT_TARGETS,
   FONT_OPTIONS,
   COLOR_KEYS,
   DEFAULT_THEME,
@@ -35,11 +38,19 @@ let dirty = false,
 const undoStack = [],
   redoStack = [];
 const previewFonts = new Set();
+let styleTarget = 'page',
+  selectedElement = null,
+  picking = false,
+  keepColors = false;
 const project = () => library.projects.find((p) => p.id === projectId) || library.projects[0];
 const page = () => project().pages.find((p) => p.id === pageId) || project().pages[0];
 const theme = () => (scope === 'page' && page().theme ? page().theme : project().theme);
 const activeTheme = () => page().theme ?? project().theme;
-const snapshot = () => ({ library: structuredClone(library), projectId, pageId });
+const snapshot = () => ({
+  library: structuredClone(library),
+  projectId,
+  pageId,
+});
 
 function notice(message) {
   $('#notice').textContent = message;
@@ -54,7 +65,10 @@ async function request(url, data, mode = 'json') {
       ? {}
       : {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Style-Studio': 'local' },
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Style-Studio': 'local',
+          },
           body: JSON.stringify(data),
         },
   );
@@ -166,6 +180,8 @@ function selectProject(id) {
   projectId = id;
   pageId = project().pages[0].id;
   sectionId = null;
+  selectedElement = null;
+  picking = false;
   scope = page().theme ? 'page' : 'site';
   render();
   renderPreview();
@@ -175,6 +191,8 @@ function selectPage(id) {
   commitInput();
   pageId = id;
   sectionId = null;
+  selectedElement = null;
+  picking = false;
   scope = page().theme ? 'page' : 'site';
   render();
   renderPreview();
@@ -191,6 +209,10 @@ function updateThemePreview() {
     {
       type: 'studio-theme',
       theme: selected,
+      elementStyles: page().elementStyles,
+      picking,
+      pickTarget: styleTarget,
+      selectedSelector: selectedElement?.selector,
       fonts,
       fontCatalog: library.fonts.map(({ id, name }) => ({ id, name })),
     },
@@ -198,13 +220,18 @@ function updateThemePreview() {
   );
   updateChecks();
   updateRecipeSelection();
+  updateStyleBrowsers();
 }
 function updateRecipeSelection() {
   for (const button of document.querySelectorAll('[data-recipe]')) {
     const recipe = [...RECIPES, ...library.recipes].find((r) => r.id === button.dataset.recipe);
     button.setAttribute(
       'aria-pressed',
-      String(Object.keys(DEFAULT_THEME).every((key) => recipe.theme[key] === theme()[key])),
+      String(
+        Object.keys(DEFAULT_THEME).every(
+          (key) => JSON.stringify(recipe.theme[key]) === JSON.stringify(theme()[key]),
+        ),
+      ),
     );
   }
 }
@@ -269,6 +296,7 @@ function render() {
         `<button type="button" class="recipe-card" data-recipe="${recipe.id}" aria-label="Apply ${e(recipe.name)} style"><span class="recipe-swatches" aria-hidden="true">${['canvas', 'surface', 'text', 'accent'].map((key) => `<i style="background:${recipe.theme[key]}"></i>`).join('')}</span><strong>${e(recipe.name)}</strong><small>${e(recipe.description)}</small></button>`,
     )
     .join('');
+  filterRecipes();
   $('#font-summary').textContent = library.fonts.length
     ? `${library.fonts.length} imported font${library.fonts.length === 1 ? '' : 's'} available.`
     : 'System fonts are available immediately.';
@@ -291,6 +319,11 @@ function options(choices, current) {
     })
     .join('');
 }
+function filterRecipes() {
+  const search = $('#recipe-search').value.toLowerCase().trim();
+  for (const card of document.querySelectorAll('[data-recipe]'))
+    card.hidden = !card.textContent.toLowerCase().includes(search);
+}
 function selectField(key, label, choices) {
   return `<label class="field">${label}<select data-token="${key}">${options(choices, theme()[key])}</select></label>`;
 }
@@ -299,6 +332,134 @@ function rangeField(key, label, min, max, step = 1, unit = '') {
 }
 function group(id, title, content, open = false) {
   return `<details class="control-group" data-group="${id}" ${open ? 'open' : ''}><summary>${title}</summary>${content}</details>`;
+}
+function browserCatalog(kind) {
+  return kind === 'palette' ? PALETTES : styleTarget === 'page' ? RECIPES : COMPONENT_STYLES;
+}
+function browserIndex(kind) {
+  const t = theme();
+  const element =
+    selectedElement &&
+    page().elementStyles?.find((item) => item.selector === selectedElement.selector);
+  if (kind === 'palette') {
+    if (styleTarget === 'page')
+      return PALETTES.findIndex((item) =>
+        [...COLOR_KEYS, 'canvasPattern'].every((key) => item.colors[key] === t[key]),
+      );
+    return PALETTES.findIndex(
+      (item) => item.id === (element?.paletteId ?? t.componentPalettes[styleTarget]),
+    );
+  }
+  if (styleTarget === 'page')
+    return RECIPES.findIndex((item) =>
+      Object.keys(DEFAULT_THEME).every(
+        (key) => JSON.stringify(item.theme[key]) === JSON.stringify(t[key]),
+      ),
+    );
+  return COMPONENT_STYLES.findIndex(
+    (item) => item.id === (element?.styleId ?? t.componentStyles[styleTarget]),
+  );
+}
+function carousel(kind, label) {
+  return `<section class="style-carousel" data-carousel="${kind}" aria-label="${label}" tabindex="0"><div class="carousel-heading"><h3>${label}</h3><span data-browser-count="${kind}"></span></div><div class="carousel-navigation"><button type="button" data-cycle="${kind}" data-step="-1" aria-label="Previous ${kind === 'palette' ? 'color palette' : 'style'}">←</button><div class="carousel-title" data-browser-title="${kind}" aria-live="polite"></div><button type="button" data-cycle="${kind}" data-step="1" aria-label="Next ${kind === 'palette' ? 'color palette' : 'style'}">→</button></div><div class="browser-swatches" data-browser-swatches="${kind}" aria-hidden="true"></div><p class="control-help" data-browser-description="${kind}"></p><label class="browser-jump">Jump to a ${kind === 'palette' ? 'palette' : 'style'}<select data-browser-select="${kind}"></select></label></section>`;
+}
+function styleBrowsers() {
+  const targets = [
+    ['page', 'Entire page design'],
+    ...Object.entries(COMPONENT_TARGETS).map(([key, item]) => [key, item.name]),
+  ];
+  const selection = selectedElement
+    ? `<p class="element-selection">Selected: <strong>${e(selectedElement.label)}</strong><small>This element on this page only.</small></p><button type="button" data-action="clear-selection">Style all ${e(COMPONENT_TARGETS[styleTarget].name.toLowerCase())} instead</button>`
+    : styleTarget !== 'page'
+      ? `<p class="control-help">All ${e(COMPONENT_TARGETS[styleTarget].name.toLowerCase())} in the chosen scope.</p>`
+      : '';
+  const lock =
+    styleTarget === 'page'
+      ? `<label class="keep-colors"><input id="keep-colors" type="checkbox" ${keepColors ? 'checked' : ''}>Keep my colors when browsing designs</label>`
+      : '';
+  return `<div class="preset-browser"><div class="browser-intro"><p class="eyebrow">50 designs · 50 palettes · 50 treatments</p><h2>Browse styles.</h2><p>Use the arrows to try complete looks, then mix and match.</p></div>
+    <label>Style target<select id="style-target">${options(targets, styleTarget)}</select></label>
+    <div class="selection-tools"><button type="button" data-action="pick-element" aria-pressed="${picking}">${picking ? 'Cancel picking' : 'Pick an element in the preview'}</button>${selection}</div>
+    ${carousel('style', styleTarget === 'page' ? 'Page designs' : 'Component styles')}${lock}${carousel('palette', 'Colors & backgrounds')}
+    ${styleTarget !== 'page' ? '<button type="button" class="wide-button" data-action="reset-component">Use page defaults for this target</button>' : ''}
+    <p class="browser-key-hint">Focus a browser and use the keyboard’s ← / → keys. Undo is always available.</p></div>`;
+}
+function updateStyleBrowsers() {
+  for (const kind of ['style', 'palette']) {
+    const title = $(`[data-browser-title="${kind}"]`);
+    if (!title) continue;
+    const catalog = browserCatalog(kind),
+      index = browserIndex(kind),
+      item = catalog[index];
+    title.textContent =
+      item?.name ?? (kind === 'palette' ? 'Current colors' : 'Page defaults / custom');
+    $(`[data-browser-count="${kind}"]`).textContent =
+      `${index < 0 ? '—' : index + 1} / ${catalog.length}`;
+    $(`[data-browser-description="${kind}"]`).textContent =
+      item?.description ?? 'Click an arrow to start exploring the library.';
+    const colors = item?.colors || item?.theme || activeTheme();
+    $(`[data-browser-swatches="${kind}"]`).innerHTML =
+      styleTarget !== 'page' && kind === 'style'
+        ? `<span class="component-sample" style="border-radius:${Math.min(item?.corner ?? 8, 30)}px;font-family:${item ? FONT_OPTIONS[item.font].family.replaceAll('"', '&quot;') : 'inherit'}">Aa <span>Preview</span></span>`
+        : ['canvas', 'surface', 'text', 'accent']
+            .map((key) => `<i style="background:${colors[key]}"></i>`)
+            .join('');
+    const select = $(`[data-browser-select="${kind}"]`);
+    select.innerHTML =
+      `<option value="" disabled ${index < 0 ? 'selected' : ''}>Choose from ${catalog.length} options</option>` +
+      options(
+        catalog.map((r, i) => [r.id, `${i + 1}. ${r.name}`]),
+        item?.id,
+      );
+  }
+  const pickButton = $('[data-action="pick-element"]');
+  if (pickButton) {
+    pickButton.setAttribute('aria-pressed', String(picking));
+    pickButton.textContent = picking ? 'Cancel picking' : 'Pick an element in the preview';
+  }
+}
+function applyBrowser(kind, index) {
+  const catalog = browserCatalog(kind),
+    item = catalog[(index + catalog.length) % catalog.length];
+  transaction(
+    () => {
+      if (styleTarget === 'page') {
+        let updated;
+        if (kind === 'palette') updated = { ...theme(), ...item.colors };
+        else {
+          updated = structuredClone(item.theme);
+          if (keepColors)
+            for (const key of [...COLOR_KEYS, 'canvasPattern']) updated[key] = theme()[key];
+        }
+        if (scope === 'page') page().theme = updated;
+        else project().theme = updated;
+      } else if (selectedElement) {
+        page().elementStyles ??= [];
+        let entry = page().elementStyles.find(
+          (entry) => entry.selector === selectedElement.selector,
+        );
+        if (!entry) {
+          if (page().elementStyles.length >= 100)
+            throw new Error('This page already has 100 individual styles.');
+          entry = { selector: selectedElement.selector, target: styleTarget };
+          page().elementStyles.push(entry);
+        }
+        entry[kind === 'palette' ? 'paletteId' : 'styleId'] = item.id;
+      } else {
+        const updated = structuredClone(theme());
+        updated[kind === 'palette' ? 'componentPalettes' : 'componentStyles'][styleTarget] =
+          item.id;
+        if (scope === 'page') page().theme = updated;
+        else project().theme = updated;
+      }
+    },
+    { rerender: false, preview: false },
+  );
+  updateThemePreview();
+}
+function cycleBrowser(kind, step) {
+  const index = browserIndex(kind);
+  applyBrowser(kind, (index < 0 ? (step < 0 ? 0 : -1) : index) + step);
 }
 function renderControls() {
   if (tab === 'content') return renderContent();
@@ -342,6 +503,11 @@ function renderControls() {
         ['split', 'Text and profile'],
         ['reverse', 'Profile first'],
         ['center', 'Centered'],
+        ['banner', 'Wide banner'],
+        ['portrait-led', 'Portrait led'],
+        ['compact', 'Compact studio'],
+        ['magazine', 'Magazine'],
+        ['split-panel', 'Split panel'],
       ]) +
         selectField('projects', 'Project layout', [
           ['grid', 'Card grid'],
@@ -410,13 +576,17 @@ function renderControls() {
         ['page', 'This page only'],
       ],
       scope,
-    )}</select></label><p>${scope === 'page' ? 'Page changes start from the current site style.' : page().theme ? 'This page has its own style. Use site style below to preview shared changes here.' : 'Shared typography, colors, and components keep the pages consistent.'}</p>${page().theme ? '<button type="button" data-action="clear-page-style">Use site style on this page</button>' : ''}</div>` +
+    )}</select></label>${scope === 'page' ? '<p>Overrides for this page.</p>' : page().theme ? '<p>This page has its own style. Use site style below to preview shared changes here.</p>' : ''}${page().theme ? '<button type="button" data-action="clear-page-style">Use site style on this page</button>' : ''}</div>` +
+    styleBrowsers() +
+    `<details class="advanced-controls" data-group="advanced" ${open.has('advanced') ? 'open' : ''}><summary>Advanced adjustments</summary><p class="control-help">Fine-tune the design after finding a starting point.</p>` +
     sections
       .map(([id, title, content, defaultOpen]) =>
         group(id, title, content, first ? defaultOpen : open.has(id)),
       )
-      .join('');
+      .join('') +
+    '</details>';
   updateChecks();
+  updateStyleBrowsers();
 }
 function updateChecks() {
   if (!$('#contrast-checks')) return;
@@ -489,6 +659,36 @@ function setToken(key, value) {
 }
 
 const actions = {
+  'pick-element'() {
+    picking = !picking;
+    if (picking)
+      notice('Click a heading, action, card, field, portrait, section, or text in the preview.');
+    updateThemePreview();
+  },
+  'clear-selection'() {
+    selectedElement = null;
+    renderControls();
+    updateThemePreview();
+  },
+  'reset-component'() {
+    transaction(
+      () => {
+        if (selectedElement)
+          page().elementStyles = page().elementStyles.filter(
+            (entry) => entry.selector !== selectedElement.selector,
+          );
+        else {
+          const updated = structuredClone(theme());
+          delete updated.componentStyles[styleTarget];
+          delete updated.componentPalettes[styleTarget];
+          if (scope === 'page') page().theme = updated;
+          else project().theme = updated;
+        }
+      },
+      { rerender: false, preview: false },
+    );
+    updateThemePreview();
+  },
   'manage-recipes'() {
     if (!library.recipes.length)
       return notice('Save a custom style first. Built-in recipes are always available.');
@@ -711,6 +911,7 @@ document.addEventListener('click', (event) => {
     if (button.dataset.action)
       Promise.resolve(actions[button.dataset.action]?.()).catch((error) => notice(error.message));
     if (button.dataset.project) selectProject(button.dataset.project);
+    if (button.dataset.cycle) cycleBrowser(button.dataset.cycle, Number(button.dataset.step));
     if (button.dataset.recipe) {
       const recipe = [...RECIPES, ...library.recipes].find((r) => r.id === button.dataset.recipe);
       transaction(() => {
@@ -759,6 +960,9 @@ document.addEventListener('click', (event) => {
 document.addEventListener('input', (event) => {
   const field = event.target;
   try {
+    if (field.id === 'recipe-search') {
+      filterRecipes();
+    }
     if (field.dataset.token || field.dataset.hex) {
       const key = field.dataset.token || field.dataset.hex;
       const value =
@@ -798,7 +1002,20 @@ document.addEventListener('input', (event) => {
 });
 document.addEventListener('change', (event) => {
   const field = event.target;
-  if (field.id === 'project-select') selectProject(field.value);
+  if (field.dataset.browserSelect && field.value) {
+    const kind = field.dataset.browserSelect;
+    applyBrowser(
+      kind,
+      browserCatalog(kind).findIndex((item) => item.id === field.value),
+    );
+  } else if (field.id === 'style-target') {
+    styleTarget = field.value;
+    selectedElement = null;
+    picking = false;
+    renderControls();
+    updateThemePreview();
+  } else if (field.id === 'keep-colors') keepColors = field.checked;
+  else if (field.id === 'project-select') selectProject(field.value);
   else if (field.id === 'page-select') selectPage(field.value);
   else if (field.id === 'scope-select') {
     scope = field.value;
@@ -824,6 +1041,20 @@ $('#modal-form').addEventListener('submit', (event) => {
   }
 });
 document.addEventListener('keydown', (event) => {
+  if (
+    ['ArrowLeft', 'ArrowRight'].includes(event.key) &&
+    !event.target.matches('input,textarea,select')
+  ) {
+    const browser = event.target.closest('[data-carousel]');
+    if (browser) {
+      event.preventDefault();
+      cycleBrowser(browser.dataset.carousel, event.key === 'ArrowLeft' ? -1 : 1);
+    }
+  }
+  if (event.key === 'Escape' && picking) {
+    picking = false;
+    updateThemePreview();
+  }
   if (
     event.key === 'Escape' &&
     !$('#modal').open &&
@@ -857,6 +1088,17 @@ window.addEventListener('beforeunload', (event) => {
 window.addEventListener('message', (event) => {
   if (event.source !== $('#preview').contentWindow || event.origin !== location.origin) return;
   if (event.data?.type === 'studio-ready') updateThemePreview();
+  if (event.data?.type === 'studio-select' && Object.hasOwn(COMPONENT_TARGETS, event.data.target)) {
+    styleTarget = event.data.target;
+    selectedElement = {
+      selector: event.data.selector,
+      label: String(event.data.label).slice(0, 60),
+    };
+    picking = false;
+    tab = 'style';
+    render();
+    updateThemePreview();
+  }
   if (event.data?.type === 'studio-link') {
     const target = project().pages.find(
       (p, index) => pageFilename(p, index) === event.data.href?.split('#')[0],
@@ -954,7 +1196,11 @@ $('#font-file').addEventListener('change', async (event) => {
       reader.onerror = () => reject(new Error('Could not read the font.'));
       reader.readAsDataURL(file);
     });
-    const font = { id: uid('font'), name: file.name.replace(/\.[^.]+$/, '').slice(0, 80), data };
+    const font = {
+      id: uid('font'),
+      name: file.name.replace(/\.[^.]+$/, '').slice(0, 80),
+      data,
+    };
     const face = new FontFace(`StudioFont_${font.id}`, `url("${data}")`);
     await face.load();
     transaction(() => library.fonts.push(font), { preview: false });

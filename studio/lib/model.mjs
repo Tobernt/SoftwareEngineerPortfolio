@@ -1,16 +1,30 @@
+import { buildPageRecipes, COMPONENT_TARGETS, COMPONENT_STYLES, PALETTES } from './catalog.mjs';
+export { COMPONENT_TARGETS, COMPONENT_STYLES, PALETTES } from './catalog.mjs';
 export const VERSION = 1;
 export const FONT_OPTIONS = {
   system: { label: 'System sans', family: 'system-ui, sans-serif' },
-  humanist: { label: 'Humanist · Segoe UI', family: '"Segoe UI", system-ui, sans-serif' },
+  humanist: {
+    label: 'Humanist · Segoe UI',
+    family: '"Segoe UI", system-ui, sans-serif',
+  },
   technical: {
     label: 'Technical · Bahnschrift',
     family: 'Bahnschrift, "Arial Narrow", sans-serif',
   },
   grotesk: { label: 'Clean · Arial', family: 'Arial, Helvetica, sans-serif' },
-  serif: { label: 'Serif · Georgia', family: 'Georgia, "Times New Roman", serif' },
-  book: { label: 'Book · Palatino', family: '"Palatino Linotype", Palatino, Georgia, serif' },
+  serif: {
+    label: 'Serif · Georgia',
+    family: 'Georgia, "Times New Roman", serif',
+  },
+  book: {
+    label: 'Book · Palatino',
+    family: '"Palatino Linotype", Palatino, Georgia, serif',
+  },
   classic: { label: 'Compact · Tahoma', family: 'Tahoma, Verdana, sans-serif' },
-  mono: { label: 'Monospace · Consolas', family: 'Consolas, "Courier New", monospace' },
+  mono: {
+    label: 'Monospace · Consolas',
+    family: 'Consolas, "Courier New", monospace',
+  },
 };
 
 export const DEFAULT_THEME = {
@@ -41,9 +55,12 @@ export const DEFAULT_THEME = {
   buttonStyle: 'solid',
   portrait: 'circle',
   navStyle: 'line',
+  canvasPattern: 'none',
+  componentStyles: {},
+  componentPalettes: {},
 };
 
-export const RECIPES = [
+const LEGACY_RECIPES = [
   {
     id: 'graphite',
     name: 'Graphite',
@@ -126,6 +143,7 @@ export const RECIPES = [
     },
   },
 ];
+export const RECIPES = buildPageRecipes(DEFAULT_THEME, LEGACY_RECIPES);
 
 export const COLOR_KEYS = ['canvas', 'surface', 'text', 'muted', 'accent', 'onAccent', 'border'];
 export const NUMBERS = {
@@ -142,7 +160,17 @@ export const NUMBERS = {
   columns: [1, 3],
 };
 export const ENUMS = {
-  hero: ['split', 'reverse', 'center'],
+  hero: [
+    'split',
+    'reverse',
+    'center',
+    'banner',
+    'portrait-led',
+    'compact',
+    'magazine',
+    'split-panel',
+  ],
+  canvasPattern: ['none', 'grid', 'dots', 'bands', 'crosshatch', 'diagonal'],
   projects: ['grid', 'list'],
   sections: ['rules', 'blocks', 'plain'],
   shadow: ['none', 'soft', 'lifted'],
@@ -213,7 +241,47 @@ export function normalizeTheme(input = {}, fonts = []) {
       result[key] = input[key];
     }
   }
+  for (const [key, catalog] of [
+    ['componentStyles', COMPONENT_STYLES],
+    ['componentPalettes', PALETTES],
+  ]) {
+    result[key] = {};
+    const entries = input[key] ?? {};
+    if (typeof entries !== 'object' || Array.isArray(entries))
+      throw new Error('Invalid component styles.');
+    for (const [target, value] of Object.entries(entries)) {
+      if (!Object.hasOwn(COMPONENT_TARGETS, target) || !catalog.some((item) => item.id === value))
+        throw new Error('Unknown component style or target.');
+      result[key][target] = value;
+    }
+  }
   return result;
+}
+
+export function normalizeElementStyles(styles = []) {
+  return array(styles, 100, 'element style').map((style) => {
+    const selector = string(style.selector, '', 1600);
+    // Only stable tag paths emitted by the picker; never accept arbitrary CSS from imports.
+    if (
+      !/^[a-z][a-z0-9-]*(?::nth-of-type\([1-9]\d*\))?(?: > [a-z][a-z0-9-]*:nth-of-type\([1-9]\d*\))*$/.test(
+        selector,
+      )
+    )
+      throw new Error('Invalid selected element path.');
+    if (!Object.hasOwn(COMPONENT_TARGETS, style.target)) throw new Error('Unknown element type.');
+    const result = { selector, target: style.target };
+    for (const [key, catalog] of [
+      ['styleId', COMPONENT_STYLES],
+      ['paletteId', PALETTES],
+    ]) {
+      if (style[key] != null) {
+        if (!catalog.some((item) => item.id === style[key]))
+          throw new Error('Unknown element style.');
+        result[key] = style[key];
+      }
+    }
+    return result;
+  });
 }
 
 export function normalizeLibrary(raw) {
@@ -258,6 +326,7 @@ export function normalizeLibrary(raw) {
         title: string(page.title, 'Untitled page', 80),
         source: page.source,
         theme: page.theme ? normalizeTheme(page.theme, fonts) : null,
+        elementStyles: normalizeElementStyles(page.elementStyles),
         sections,
       };
     }),
@@ -328,7 +397,11 @@ export function createBlock(type) {
       items: [],
     },
   };
-  return { id: uid('section'), type, ...structuredClone(blocks[type] ?? blocks.about) };
+  return {
+    id: uid('section'),
+    type,
+    ...structuredClone(blocks[type] ?? blocks.about),
+  };
 }
 
 export function createPage(template = 'profile', title = 'Home') {
@@ -350,7 +423,12 @@ export function createPage(template = 'profile', title = 'Home') {
   return page;
 }
 export function createProject(name, template = 'profile') {
-  return { id: uid('project'), name, theme: { ...DEFAULT_THEME }, pages: [createPage(template)] };
+  return {
+    id: uid('project'),
+    name,
+    theme: { ...DEFAULT_THEME },
+    pages: [createPage(template)],
+  };
 }
 export function seedLibrary() {
   return {
@@ -363,11 +441,26 @@ export function seedLibrary() {
         name: 'Tobias · Portfolio',
         theme: { ...DEFAULT_THEME },
         pages: [
-          { id: 'home', title: 'Portfolio', source: 'portfolio', theme: null, sections: [] },
-          { id: 'gallery', title: 'UI gallery', source: 'gallery', theme: null, sections: [] },
+          {
+            id: 'home',
+            title: 'Portfolio',
+            source: 'portfolio',
+            theme: null,
+            sections: [],
+          },
+          {
+            id: 'gallery',
+            title: 'UI gallery',
+            source: 'gallery',
+            theme: null,
+            sections: [],
+          },
         ],
       },
-      { ...createProject('New site · Example', 'services'), theme: { ...RECIPES[1].theme } },
+      {
+        ...createProject('New site · Example', 'services'),
+        theme: { ...RECIPES[1].theme },
+      },
     ],
   };
 }
@@ -411,6 +504,7 @@ export function themeAttributes(theme) {
     'data-button-style': theme.buttonStyle,
     'data-portrait': theme.portrait,
     'data-nav-style': theme.navStyle,
+    'data-canvas-pattern': theme.canvasPattern,
   };
 }
 export function themeStyle(theme, fonts = []) {

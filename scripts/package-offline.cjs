@@ -25,13 +25,20 @@ async function build() {
       recursive: true,
     });
   fs.mkdirSync(path.join(publicRoot, 'studio/lib'), { recursive: true });
-  for (const file of ['index.html', 'studio.css', 'app.mjs', 'theme.css', 'preview.mjs'])
+  for (const file of [
+    'index.html',
+    'studio.css',
+    'app.mjs',
+    'theme.css',
+    'preview.mjs',
+    'typography.mjs',
+  ])
     fs.copyFileSync(path.join(root, 'studio', file), path.join(publicRoot, 'studio', file));
-  fs.copyFileSync(
-    path.join(root, 'studio/lib/model.mjs'),
-    path.join(publicRoot, 'studio/lib/model.mjs'),
-  );
-  fs.cpSync(path.join(root, 'studio/lib'), path.join(output, 'lib'), { recursive: true });
+  for (const file of ['model.mjs', 'catalog.mjs', 'style-rules.mjs'])
+    fs.copyFileSync(path.join(root, 'studio/lib', file), path.join(publicRoot, 'studio/lib', file));
+  fs.cpSync(path.join(root, 'studio/lib'), path.join(output, 'lib'), {
+    recursive: true,
+  });
   fs.copyFileSync(path.join(root, 'studio/server.mjs'), path.join(output, 'server.mjs'));
   fs.mkdirSync(path.join(output, 'runtime'), { recursive: true });
   const runtime = path.join(output, 'runtime', path.basename(process.execPath));

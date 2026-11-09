@@ -1,4 +1,5 @@
 import { escapeHTML as e, pageFilename, themeAttributes, themeStyle } from './model.mjs';
+import { componentCSS } from './style-rules.mjs';
 
 export function pageLinks(project, current) {
   return project.pages
@@ -41,7 +42,7 @@ export function decorateHTML(
     .join(' ');
   let result = html.replace(/<html\b([^>]*)>/i, `<html$1 ${attributes}>`);
   if (base) result = result.replace(/<head>/i, `<head><base href="${e(base)}">`);
-  const injected = `<link rel="stylesheet" href="${e(stylesheet)}"><style id="site-design-tokens">${themeStyle(theme, fonts)}</style>${preview ? `<script type="module" src="${e(bridge)}"></script>` : ''}`;
+  const injected = `<link rel="stylesheet" href="${e(stylesheet)}"><style id="site-design-tokens">${themeStyle(theme, fonts)}</style><style id="site-component-styles">${componentCSS(theme, page.elementStyles)}</style><script type="module" src="${e(preview ? new URL('typography.mjs', bridge).href : 'assets/design-typography.mjs')}"></script>${preview ? `<script type="module" src="${e(bridge)}"></script>` : ''}`;
   result = result.replace(/<\/head>/i, injected + '</head>');
   // Include additional template pages in the original site's navigation too.
   if (page.source !== 'builder' && project.pages.some((p) => p.source === 'builder')) {
