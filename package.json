@@ -1,37 +1,38 @@
 {
-  "name": "tailwindsite",
+  "name": "tobias-berntsson-software-engineer-portfolio",
   "version": "1.0.0",
-  "description": "Static Tailwind portfolio with gallery navigation.",
+  "description": "Software engineering portfolio with accessible English and Swedish content.",
   "main": "tailwind.config.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "dev": "tailwindcss -i ./src/styles/tailwind.css -o ./assets/styles.css --watch",
-    "prebuild": "npm install --prefix react-demo",
     "build": "npm run build:css && npm run build:react-demo",
     "build:css": "tailwindcss -i ./src/styles/tailwind.css -o ./assets/styles.css --minify",
     "build:react-demo": "npm run build --prefix react-demo",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
     "serve:test": "http-server -p 4173 .",
-    "test:e2e": "start-server-and-test serve:test http://localhost:4173 cy:run"
+    "build:site": "npm run build && node scripts/package-site.cjs",
+    "validate:html": "html-validate index.html gallery.html",
+    "test:browser": "playwright test"
   },
   "keywords": [
     "tailwind",
     "portfolio"
   ],
-  "author": "",
+  "author": "Tobias Berntsson",
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
     "@types/node": "^22.9.0",
     "autoprefixer": "^10.4.20",
-    "cypress": "^13.15.0",
+    "html-validate": "^11.21.0",
     "http-server": "^14.1.1",
-    "netlify-plugin-cypress": "^2.0.4",
+    "lighthouse": "^13.6.0",
     "postcss": "^8.4.49",
-    "start-server-and-test": "^2.0.9",
+    "prettier": "^3.9.10",
     "tailwindcss": "^3.4.10"
   }
 }

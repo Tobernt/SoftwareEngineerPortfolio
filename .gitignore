@@ -2,3 +2,7 @@ node_modules/
 react-demo/node_modules/
 react-demo/dist/
 *.log
+_site/
+test-results/
+playwright-report/
+node_modules/
