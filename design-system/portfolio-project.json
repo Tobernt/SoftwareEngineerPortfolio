@@ -1,0 +1,75 @@
+{
+  "kind": "style-studio-project",
+  "version": 1,
+  "project": {
+    "id": "portfolio",
+    "name": "Tobias · Portfolio",
+    "theme": {
+      "canvas": "#211b17",
+      "surface": "#322821",
+      "text": "#f0f3f8",
+      "muted": "#b9c4d2",
+      "accent": "#e2bc9b",
+      "onAccent": "#14212b",
+      "border": "#6d7c8e",
+      "headingFont": "technical",
+      "bodyFont": "grotesk",
+      "fontSize": 16,
+      "headingScale": 1,
+      "lineHeight": 1.65,
+      "contentWidth": 1280,
+      "density": 1.2,
+      "gap": 28,
+      "corner": 12,
+      "buttonCorner": 999,
+      "fieldCorner": 18,
+      "borderWidth": 1,
+      "hero": "reverse",
+      "projects": "grid",
+      "columns": 1,
+      "sections": "blocks",
+      "shadow": "lifted",
+      "buttonStyle": "solid",
+      "portrait": "square",
+      "navStyle": "pill",
+      "canvasPattern": "none",
+      "componentStyles": {},
+      "componentPalettes": {}
+    },
+    "pages": [
+      {
+        "id": "home",
+        "title": "Portfolio",
+        "source": "portfolio",
+        "theme": null,
+        "elementStyles": [
+          {
+            "selector": "body > main:nth-of-type(1) > section:nth-of-type(1) > aside:nth-of-type(1) > div:nth-of-type(2)",
+            "target": "cards",
+            "styleId": "component-2"
+          },
+          {
+            "selector": "body > main:nth-of-type(1) > section:nth-of-type(2)",
+            "target": "sections",
+            "styleId": "component-1"
+          },
+          {
+            "selector": "body > header:nth-of-type(1) > nav:nth-of-type(1)",
+            "target": "navigation",
+            "styleId": "component-1"
+          }
+        ],
+        "sections": []
+      },
+      {
+        "id": "gallery",
+        "title": "UI gallery",
+        "source": "gallery",
+        "theme": null,
+        "elementStyles": [],
+        "sections": []
+      }
+    ]
+  },
+  "fonts": []
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-design="custom" data-hero="reverse" data-projects="grid" data-sections="blocks" data-button-style="solid" data-portrait="square" data-nav-style="pill" data-canvas-pattern="none">
   <head>
     <script>document.documentElement.classList.add('js');</script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -36,7 +36,7 @@
       content="Interactive UI component gallery showcasing accessible, responsive design patterns built with Tailwind CSS.">
 
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#10b981">
+    <meta name="theme-color" content="#211b17">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -45,7 +45,8 @@
     <script type="module" src="assets/i18n.js"></script>
     <script type="module" src="src/components/gallery-components.js"></script>
     <script type="module" src="src/home.js"></script>
-  </head>
+  <link rel="stylesheet" href="assets/design.css"><style id="site-design-tokens">
+:root{--ds-canvas:#211b17;--ds-surface:#322821;--ds-text:#f0f3f8;--ds-muted:#b9c4d2;--ds-accent:#e2bc9b;--ds-onAccent:#14212b;--ds-border:#6d7c8e;--ds-body-font:Arial, Helvetica, sans-serif;--ds-heading-font:Bahnschrift, "Arial Narrow", sans-serif;--ds-font-size:16px;--ds-heading-scale:1;--ds-line-height:1.65;--ds-width:1280px;--ds-section-space:76.8px;--ds-gap:28px;--ds-corner:12px;--ds-button-corner:999px;--ds-field-corner:18px;--ds-border-width:1px;--ds-columns:1;--ds-shadow:0 18px 42px rgb(15 23 42 / .19)}</style><style id="site-component-styles"></style><script type="module" src="assets/design-typography.mjs"></script></head>
   <body class="bg-neutral-900 text-neutral-100" data-page="gallery">
     <a class="skip-link" href="#main-content"><span data-i18n="skip">Skip to content</span></a>
     <header class="site-header">

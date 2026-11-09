@@ -202,6 +202,14 @@ test('website ZIP contains actual pages, chosen styles, local assets, and a runn
   expect(files.get('index.html').toString()).toContain('data-hero="reverse"');
   expect(files.get('gallery.html').toString()).toContain('data-design="custom"');
   expect(files.get('index.html').toString()).not.toContain('/studio/preview.mjs');
+  for (const filename of ['index.html', 'gallery.html']) {
+    const html = files.get(filename).toString();
+    expect(html.match(/data-design="/g)).toHaveLength(1);
+    expect(html.match(/id="site-design-tokens"/g)).toHaveLength(1);
+    expect(html.match(/id="site-component-styles"/g)).toHaveLength(1);
+    expect(html.match(/href="assets\/design.css"/g)).toHaveLength(1);
+    expect(html.match(/src="assets\/design-typography.mjs"/g)).toHaveLength(1);
+  }
   expect(JSON.parse(files.get('design-recipe.json')).project.theme.canvas).toBe('#f1f6fb');
 });
 

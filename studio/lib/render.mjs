@@ -40,7 +40,22 @@ export function decorateHTML(
   const attributes = Object.entries(themeAttributes(theme))
     .map(([key, value]) => `${key}="${e(value)}"`)
     .join(' ');
-  let result = html.replace(/<html\b([^>]*)>/i, `<html$1 ${attributes}>`);
+  // A published portfolio may already carry a saved design. Replace that layer
+  // before previewing another recipe instead of duplicating attributes or rules.
+  let result = html
+    .replace(
+      /<style\b[^>]*id="(?:site-design-tokens|site-component-styles)"[^>]*>[\s\S]*?<\/style>/gi,
+      '',
+    )
+    .replace(/<link\b(?=[^>]*href="assets\/design\.css")[^>]*>/gi, '')
+    .replace(/<script\b(?=[^>]*src="assets\/design-typography\.mjs")[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<html\b([^>]*)>/i, (_, existing) => {
+      const clean = existing.replace(
+        /\s+data-(?:design|hero|projects|sections|button-style|portrait|nav-style|canvas-pattern)="[^"]*"/gi,
+        '',
+      );
+      return `<html${clean} ${attributes}>`;
+    });
   if (base) result = result.replace(/<head>/i, `<head><base href="${e(base)}">`);
   const injected = `<link rel="stylesheet" href="${e(stylesheet)}"><style id="site-design-tokens">${themeStyle(theme, fonts)}</style><style id="site-component-styles">${componentCSS(theme, page.elementStyles)}</style><script type="module" src="${e(preview ? new URL('typography.mjs', bridge).href : 'assets/design-typography.mjs')}"></script>${preview ? `<script type="module" src="${e(bridge)}"></script>` : ''}`;
   result = result.replace(/<\/head>/i, injected + '</head>');
