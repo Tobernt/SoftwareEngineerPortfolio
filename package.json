@@ -14,7 +14,12 @@
     "serve:test": "http-server -p 4173 .",
     "build:site": "npm run build && node scripts/package-site.cjs",
     "validate:html": "html-validate index.html gallery.html",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "build:offline": "npm run build:css && node scripts/package-offline.cjs",
+    "package:offline": "npm run build:css && node scripts/package-offline.cjs --zip",
+    "start:studio": "node OfflineStyleStudio/server.mjs --open",
+    "test:studio": "playwright test --config=playwright.studio.config.cjs",
+    "validate:studio": "html-validate studio/index.html"
   },
   "keywords": [
     "tailwind",

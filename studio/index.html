@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Style Studio · Local website workbench</title>
+    <link rel="icon" href="/sites/portfolio/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/studio/studio.css">
+    <script type="module" src="/studio/app.mjs"></script>
+  </head>
+  <body>
+    <a class="studio-skip" href="#controls">Skip to design controls</a>
+    <header class="topbar">
+      <div class="app-brand">
+        <span class="brand-mark" aria-hidden="true">S<span>↗</span></span>
+        <div>
+          <h1>Style Studio</h1>
+          <p>Website design, on your PC</p>
+        </div>
+      </div>
+      <label class="project-switch"
+        >Project<select id="project-select" aria-label="Current project"></select
+      ></label>
+      <div class="top-actions">
+        <button type="button"
+          class="library-toggle"
+          data-action="library"
+          aria-expanded="false"
+          aria-controls="library-pane"
+        >
+          Library
+        </button>
+        <div class="history-actions" role="group" aria-label="Design history">
+          <button type="button" id="undo" data-action="undo" disabled>↶ <span>Undo</span></button
+          ><button type="button" id="redo" data-action="redo" disabled>↷ <span>Redo</span></button>
+        </div>
+        <button type="button" data-action="backup">Backup library</button
+        ><button type="button" data-action="import">Import</button
+        ><button type="button" class="primary" data-action="export">Export website</button>
+      </div>
+    </header>
+    <div class="workbench">
+      <aside class="library-pane" id="library-pane" aria-label="Project and style library">
+        <div class="pane-heading">
+          <h2>Projects</h2>
+          <button type="button" class="icon-button" data-action="new-project" aria-label="Create a project">
+            +
+          </button>
+        </div>
+        <div id="project-list" class="project-list"></div>
+        <div class="project-actions">
+          <button type="button" data-action="rename-project">Rename</button
+          ><button type="button" data-action="duplicate-project">Duplicate</button
+          ><button type="button" data-action="delete-project">Delete</button>
+        </div>
+        <div class="pane-heading recipe-heading">
+          <div>
+            <p class="eyebrow">Style library</p>
+            <h2>Starting recipes</h2>
+          </div>
+        </div>
+        <p class="pane-note">A considered combination of type, color, shape, and composition.</p>
+        <div id="recipe-list" class="recipe-list"></div>
+        <button type="button" class="wide-button" data-action="save-recipe">+ Save current style</button>
+        <button type="button" class="wide-button secondary-link" data-action="export-style">
+          Export style JSON
+        </button>
+        <button type="button" class="wide-button secondary-link" data-action="manage-recipes">Manage saved styles</button>
+        <label class="upload-font"
+          >Local fonts<button type="button" data-action="font">Add a font file</button></label
+        >
+        <p class="pane-note">WOFF2, WOFF, or TTF. Fonts stay inside your library and exports.</p>
+        <p id="font-summary" class="pane-note"></p>
+        <button type="button" class="wide-button secondary-link" data-action="manage-fonts">Manage local fonts</button>
+      </aside>
+      <main class="preview-pane" aria-label="Live website preview">
+        <div class="preview-toolbar">
+          <label>Page<select id="page-select"></select></label
+          ><button type="button" data-action="new-page" class="small-button">+ Page</button>
+          <div class="device-options" role="group" aria-label="Preview device">
+            <button type="button" data-width="1200" aria-pressed="true">Desktop</button
+            ><button type="button" data-width="768" aria-pressed="false">Tablet</button
+            ><button type="button" data-width="390" aria-pressed="false">Phone</button>
+          </div>
+          <label class="width-control"
+            ><input
+              id="preview-width"
+              type="number"
+              min="320"
+              max="1800"
+              value="1200"
+              aria-label="Preview width in pixels"><span>px</span></label
+          >
+        </div>
+        <div class="preview-stage" id="preview-stage">
+          <div class="frame-fit" id="frame-fit">
+            <iframe
+              id="preview"
+              title="Website preview"
+              sandbox="allow-scripts allow-same-origin allow-forms"
+            ></iframe>
+          </div>
+          <p id="loading" class="preview-loading">Opening your local library…</p>
+        </div>
+        <div class="preview-footer">
+          <span id="preview-description">Live preview</span
+          ><span id="save-status" role="status" aria-live="polite">Loading…</span>
+        </div>
+      </main>
+      <aside class="controls-pane" id="controls" aria-label="Design controls" tabindex="-1">
+        <div class="control-tabs" role="group" aria-label="Editor panel">
+          <button type="button" data-tab="style" aria-pressed="true">Style</button
+          ><button type="button" data-tab="content" aria-pressed="false">Page content</button>
+        </div>
+        <div id="control-content"></div>
+      </aside>
+    </div>
+    <p id="notice" class="notice" role="status" aria-live="polite" hidden></p>
+    <dialog id="modal" aria-labelledby="modal-title">
+      <form id="modal-form" method="dialog">
+        <div id="modal-content"></div>
+        <div class="dialog-actions">
+          <button type="button" data-action="cancel-dialog">Cancel</button
+          ><button class="primary" id="modal-submit" type="submit">Create</button>
+        </div>
+      </form>
+    </dialog>
+    <input id="import-file" type="file" accept=".json,application/json" hidden>
+    <input id="font-file" type="file" accept=".woff2,.woff,.ttf,.otf" hidden>
+  </body>
+</html>

@@ -6,3 +6,6 @@ _site/
 test-results/
 playwright-report/
 node_modules/
+OfflineStyleStudio/
+.studio-test-data/
+dist/
