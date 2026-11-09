@@ -3,7 +3,7 @@ const fitted = new Map();
 const measure = document.createElement('span');
 measure.setAttribute('aria-hidden', 'true');
 measure.style.cssText =
-  'position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;white-space:pre;text-wrap:nowrap;padding:0;border:0;margin:0';
+  'position:fixed;left:-100000px;top:0;width:max-content;visibility:hidden;pointer-events:none;white-space:pre;text-wrap:nowrap;padding:0;border:0;margin:0';
 document.body.append(measure);
 measure.style.setProperty('transition', 'none', 'important');
 export function fitHeadings() {
