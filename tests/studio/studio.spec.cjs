@@ -77,6 +77,7 @@ test('undo and redo restore component settings and show real contrast feedback',
   page,
 }) => {
   await ready(page);
+  await page.locator('.advanced-controls > summary').click();
   await page.locator('[data-hex=canvas]').fill('#ffffff');
   await page.locator('[data-hex=canvas]').press('Tab');
   await expect(page.locator('#contrast-checks')).toContainText('Review');
@@ -129,13 +130,19 @@ test('new template sites support content editing, section order, additional page
   await page.locator('#modal [name=name]').fill('My considered style');
   await page.getByRole('button', { name: 'Save recipe', exact: true }).click();
   await expect(
-    page.getByRole('button', { name: 'Apply My considered style style', exact: true }),
+    page.getByRole('button', {
+      name: 'Apply My considered style style',
+      exact: true,
+    }),
   ).toBeVisible();
   await saved(page);
   await page.reload();
   await expect(page.locator('#project-select')).toContainText('Engineering notes');
   await expect(
-    page.getByRole('button', { name: 'Apply My considered style style', exact: true }),
+    page.getByRole('button', {
+      name: 'Apply My considered style style',
+      exact: true,
+    }),
   ).toBeVisible();
 });
 
@@ -149,9 +156,11 @@ test('backup import creates copies and malformed imports leave the library intac
   ]);
   const bytes = fs.readFileSync(await download.path());
   expect(JSON.parse(bytes).projects).toHaveLength(2);
-  await page
-    .locator('#import-file')
-    .setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: bytes });
+  await page.locator('#import-file').setInputFiles({
+    name: 'backup.json',
+    mimeType: 'application/json',
+    buffer: bytes,
+  });
   await page.getByRole('button', { name: 'Import copies', exact: true }).click();
   await expect(page.locator('#project-select option')).toHaveCount(4);
   await page.locator('#import-file').setInputFiles({
@@ -225,6 +234,84 @@ test('new sites export their own content without portfolio photos or contact cod
   expect(files.get('index.html').toString()).not.toContain('tobias_berntsson');
 });
 
+test('exported websites serve the typography module and fit whole words without the editor', async ({
+  page,
+  request,
+}, testInfo) => {
+  const path = require('node:path');
+  const { spawn } = require('node:child_process');
+  const project = model.createProject('Exported typography', 'services');
+  project.theme.headingFont = 'mono';
+  project.pages[0].sections[0].title = 'Systemutveckling för användbara lösningar.';
+  const response = await request.post('/api/export', {
+    headers: { 'X-Style-Studio': 'local' },
+    data: { project, fonts: [] },
+  });
+  const folder = testInfo.outputPath('exported-site');
+  for (const [name, contents] of unzip(await response.body())) {
+    const destination = path.resolve(folder, name);
+    expect(destination.startsWith(folder + path.sep)).toBe(true);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.writeFileSync(destination, contents);
+  }
+  const server = spawn(
+    process.execPath,
+    [path.join(folder, 'preview.cjs'), '--port=4394', '--no-open'],
+    { windowsHide: true, stdio: 'ignore' },
+  );
+  try {
+    await expect
+      .poll(async () => {
+        try {
+          return (await request.get('http://127.0.0.1:4394/')).status();
+        } catch {
+          return 0;
+        }
+      })
+      .toBe(200);
+    const errors = [],
+      external = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.route('**/*', (route) => {
+      if (!route.request().url().startsWith('http://127.0.0.1:4394')) {
+        external.push(route.request().url());
+        return route.abort();
+      }
+      return route.continue();
+    });
+    await page.setViewportSize({ width: 320, height: 850 });
+    const [moduleResponse] = await Promise.all([
+      page.waitForResponse((response) => response.url().endsWith('/assets/design-typography.mjs')),
+      page.goto('http://127.0.0.1:4394/'),
+    ]);
+    expect(moduleResponse.headers()['content-type']).toContain('text/javascript');
+    await expect
+      .poll(() =>
+        page.locator('h1').evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize)),
+      )
+      .toBeLessThan(35.2);
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+      .toBeLessThanOrEqual(320);
+    const rects = await page.locator('h1').evaluate((heading) => {
+      const range = document.createRange();
+      range.setStart(heading.firstChild, 0);
+      range.setEnd(heading.firstChild, 'Systemutveckling'.length);
+      return range.getClientRects().length;
+    });
+    expect(rects).toBe(1);
+    expect(external).toEqual([]);
+    expect(errors).toEqual([]);
+  } finally {
+    const stopped = new Promise((resolve) => server.once('exit', resolve));
+    server.kill();
+    await stopped;
+  }
+});
+
 test('local font files work in previews, export with styles, and can be removed or restored', async ({
   page,
 }) => {
@@ -240,6 +327,7 @@ test('local font files work in previews, export with styles, and can be removed 
   );
   await page.locator('#font-file').setInputFiles(fontPath);
   await expect(page.locator('#notice')).toContainText('Font added');
+  await page.locator('.advanced-controls > summary').click();
   const fontKey = await page.locator('[data-token=bodyFont] option').last().getAttribute('value');
   await page.locator('[data-token=bodyFont]').selectOption(fontKey);
   await expect(page.frameLocator('#preview').locator('body')).toHaveCSS(
@@ -310,9 +398,20 @@ for (const recipe of ['Graphite', 'Harbor', 'Kiln', 'Field Notes']) {
           } else await page.locator(`[data-width="${width}"]`).click();
           await expect(page.locator('#loading')).toBeHidden();
           const frame = page.frameLocator('#preview');
-          const overflow = await frame
+          await frame
             .locator('html')
-            .evaluate((element) => ({ scroll: element.scrollWidth, client: element.clientWidth }));
+            .evaluate(() =>
+              document.fonts.ready.then(
+                () =>
+                  new Promise((resolve) =>
+                    requestAnimationFrame(() => requestAnimationFrame(resolve)),
+                  ),
+              ),
+            );
+          const overflow = await frame.locator('html').evaluate((element) => ({
+            scroll: element.scrollWidth,
+            client: element.clientWidth,
+          }));
           expect(overflow.scroll, `${recipe} ${projectLabel} ${id} ${width}`).toBeLessThanOrEqual(
             overflow.client,
           );
@@ -322,7 +421,10 @@ for (const recipe of ['Graphite', 'Harbor', 'Kiln', 'Field Notes']) {
           expect(
             audit.violations.map((v) => ({
               id: v.id,
-              nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
+              nodes: v.nodes.map((n) => ({
+                target: n.target,
+                summary: n.failureSummary,
+              })),
             })),
           ).toEqual([]);
         }

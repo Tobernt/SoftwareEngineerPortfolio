@@ -37,16 +37,20 @@ Narrow screen
 
 - **Hierarchy:** separate page content from presentation; keep one primary page heading and use ordered type sizes.
 - **Consistency:** shared site tokens style every page; explicit page overrides are available for deliberate exceptions.
-- **Progressive disclosure:** group colors, type, layouts, components, and design checks in labeled sections.
+- **Progressive disclosure:** make complete style and palette browsing the default task, and keep individual token controls inside collapsed Advanced adjustments.
 - **Feedback and recovery:** visible local save state, undo/redo, reset to site style, named recipes, and JSON backups.
 - **Readability:** restrained line lengths, a spacing scale, system font choices, and contrast ratios for text and buttons.
 - **Keyboard access:** native controls, labeled inputs, clear focus, accessible dialogs, and move-up/down section controls.
 - **Responsive design:** inspect real desktop, tablet, and phone viewport widths; layouts collapse without changing the underlying content hierarchy.
 - **Deliberate variation:** recipes differ in typography, density, page composition, component shape, and palette. Customization is deterministic and reviewable.
 
-## Recipes
+## Preset libraries
 
-Graphite retains the portfolio's dark engineering character. Harbor uses a cool light palette and a reversed introduction. Kiln uses rose-toned surfaces, serif headings, generous corners, and a centered composition. Field Notes combines pale green surfaces, traditional display type, restrained borders, and compact sections. These are starting points; individual tokens and component styles remain editable.
+The catalog contains 50 authored page compositions, 50 color/background palettes, and 50 reusable component treatments. Complete designs vary introduction layout, serif/sans/monospace typography, navigation, grids or rows, spacing, and surface shapes. Eight introduction layouts include split, reverse, centered, banner, portrait-led, compact, magazine, and split panel. Graphite, Harbor, Kiln, and Field Notes keep their original identifiers for existing projects.
+
+Numbered previous/next browsers wrap at either end, retain keyboard focus, and support Left/Right keys. Direct selection and library search complement the browsing workflow. Palettes are independent of designs, with an optional color lock. Component treatments combine typography, spacing, shape, and clean, outline, soft, raised, rule, double-frame, offset, inset, solid, heavy, rail, or open treatments. Each treatment works on eight semantic target groups or an individual picked element. Structural selectors are validated and stored with the page. Shared group styles and individual overrides render through the same CSS generator in preview and export.
+
+Whole-word heading wrapping replaces automatic hyphenation. The local typography module measures words without wrapping and reduces type only when a word exceeds the available line width; it responds to font, language, and width changes. Heading size changes settle immediately, including with reduced motion enabled. The same module is packaged with exported websites.
 
 ## Local operation and boundaries
 

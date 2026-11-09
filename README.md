@@ -2,7 +2,7 @@
 
 A personal software engineering portfolio focused on backend development, internal systems, automation, and operational problem solving. English and Swedish content is based on Tobias's supplied CVs, including employment dates, education, and project descriptions.
 
-The local **Style Studio** adds an offline visual editor, reusable style recipes, editable page templates, and website exports. Open `Open Style Studio.cmd` or read the [local workbench guide](docs/STYLE-STUDIO.md). The runnable Windows app includes its own runtime; projects save on this PC.
+The local **Style Studio** adds an offline visual editor with 50 page designs, 50 color/background palettes, and 50 component treatments. Browse with left/right arrows, style individual elements in the preview, build editable template pages, and export complete websites. Open `Open Style Studio.cmd` or read the [local workbench guide](docs/STYLE-STUDIO.md). The runnable Windows app includes its own runtime; projects save on this PC.
 
 - **Live portfolio:** [tobernt.github.io/SoftwareEngineerPortfolio](https://tobernt.github.io/SoftwareEngineerPortfolio/)
 - **Source:** [Tobernt/SoftwareEngineerPortfolio](https://github.com/Tobernt/SoftwareEngineerPortfolio)
