@@ -1,0 +1,48 @@
+{
+  "image": {
+    "alt": "Portrait of Tobias Berntsson",
+    "width": "592",
+    "height": "861"
+  },
+  "navigation": true,
+  "main": true,
+  "projects": 4,
+  "aside": true,
+  "headings": {
+    "h1": 1,
+    "h2": 6,
+    "h3": 9
+  },
+  "externalLink": true,
+  "contactForm": {
+    "fields": [
+      {
+        "type": "text",
+        "present": true
+      },
+      {
+        "type": "email",
+        "present": true
+      },
+      {
+        "type": "url",
+        "present": true
+      },
+      {
+        "type": "tel",
+        "present": true
+      },
+      {
+        "type": "checkbox",
+        "present": true
+      }
+    ],
+    "dropdown": true,
+    "textarea": true,
+    "submit": true
+  },
+  "contactEmail": true,
+  "footer": true,
+  "source": "https://postmodernistx.github.io/bcu26d-musical-octo-disco/examination/02-inl-1.html",
+  "checkedAt": "2026-11-09T15:13:04.318Z"
+}

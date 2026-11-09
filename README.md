@@ -9,11 +9,11 @@ The local **Style Studio** adds an offline visual editor with 50 page designs, 5
 - **Assignment checklist and submission notes:** [docs/ASSIGNMENT.md](docs/ASSIGNMENT.md)
 - **Layout sketches and design choices:** [docs/PORTFOLIO-DIRECTION.md](docs/PORTFOLIO-DIRECTION.md)
 
-![Desktop portfolio preview with software engineering introduction and circular portrait](docs/evidence/home-desktop.png)
+![Selected espresso portfolio design with profile-first introduction](docs/evidence/home-desktop.png)
 
 ## Content and behavior
 
-The homepage includes a circular profile photograph, an informational sidebar, four project examples, employment history, education, technology skills, and a contact form. The UI gallery retains the original interactive demonstrations.
+The homepage uses the selected espresso and tan design, with a profile-first desktop introduction, an informational sidebar, four stacked project examples, employment history, education, technology skills, and a contact form. The UI gallery retains the original interactive demonstrations.
 
 The contact form includes name, email, optional website and visitor telephone fields, a topic dropdown, a reply-permission checkbox, and a message textarea. It validates the required fields and prepares an encoded email link locally. The visitor reviews and sends the message in their own email application. No messages are sent automatically and no visitor details are stored by the site. The owner's personal telephone number and original CV PDFs are not published.
 
@@ -66,6 +66,8 @@ npm run build:site
 npx playwright install chromium
 npm run test:browser
 ```
+
+The selected export is saved in `design-system/portfolio-project.json`. `npm run build:site` applies it automatically; `npm run apply:design` reapplies it without rebuilding. The same theme stays editable in the local Style Studio.
 
 The browser suite exercises native form validation, Unicode-safe email drafts, invalidation of stale drafts, preservation of data during translation, mobile navigation, gallery interactions, no-JavaScript content, responsive layouts, and axe checks. With the local server running, `node scripts/capture-evidence.cjs` refreshes the screenshots from the current page and saved audit reports.
 

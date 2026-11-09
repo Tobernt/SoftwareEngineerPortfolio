@@ -4,11 +4,13 @@ Kurs: BCU26D, HTML & CSS. [Uppgiftsbeskrivning och kravlista](https://postmodern
 
 Uppgiften tillåter både Tailwind och att återanvända en befintlig portfolio. Den här versionen utgår från TailwindSite och har anpassats till kravlistan och en tydligare profil inom systemutveckling.
 
+Den valda designen från `website.zip` är applicerad på startsidan och galleriet. Kraven kontrollerades på produktionsbygget den 9 november 2026; [checklistans resultat](evidence/assignment-checklist.json) och aktuella granskningsbilder finns i repot. Startsidan har Lighthouse 100/100/100/100, båda sidorna har godkänd HTML-validering och startsidan har inga Firefox-fynd. Samtliga 10 portfoliotester och 21 editortester passerar.
+
 ## Krav och implementation
 
 | Krav | Var det finns |
 | --- | --- |
-| Bild med alt-text, höjd och bredd | Porträttet i introduktionen; originalbilden visas med en cirkulär CSS-ram |
+| Bild med alt-text, höjd och bredd | Porträttet i introduktionen; ramen följer den valda designen från Style Studio |
 | Navigation/meny | Gemensam navigation på startsidan och i galleriet; mobilmeny med tangentbordsstöd |
 | Huvudinnehåll i `main` | Båda HTML-sidorna |
 | Minst tre projekt | Fyra projekt på startsidan, med beskrivning och teknik |
