@@ -95,19 +95,23 @@ test('gallery controls and entered data survive language changes', async ({ page
   await expect(page.locator('[data-open-modal]')).toBeFocused();
 });
 
-test('gallery tabs wrap when a wider fallback font is used', async ({ page }) => {
+test('both pages wrap long text with wider fallback fonts', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 });
-  await page.goto('/gallery.html');
-  await page.addStyleTag({ content: 'body { font-family: Verdana, sans-serif !important; }' });
-  for (const language of ['en', 'sv']) {
-    if (language === 'sv') {
-      await page.locator('[data-menu-toggle]').click();
-      await page.locator('[data-lang-toggle]').click();
-      await page.locator('[data-menu-toggle]').click();
+  for (const url of ['/', '/gallery.html']) {
+    await page.goto(url);
+    await page.addStyleTag({
+      content: 'body,h1,h2,h3 { font-family: Verdana, sans-serif !important; }',
+    });
+    for (const language of ['en', 'sv']) {
+      if ((await page.locator('html').getAttribute('lang')) !== language) {
+        await page.locator('[data-menu-toggle]').click();
+        await page.locator('[data-lang-toggle]').click();
+        await page.locator('[data-menu-toggle]').click();
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+        320,
+      );
     }
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
-      320,
-    );
   }
 });
 

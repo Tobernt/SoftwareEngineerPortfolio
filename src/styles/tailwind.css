@@ -9,6 +9,17 @@
   html {
     scroll-padding-top: 7rem;
   }
+
+  /* Swedish compound words must remain readable with every system font. */
+  main {
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  h2,
+  h3 {
+    hyphens: auto;
+  }
   body {
     @apply bg-neutral-950 text-neutral-100 antialiased;
     font-family: theme('fontFamily.sans');
@@ -161,6 +172,9 @@
   }
   .about-section {
     @apply grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-16;
+  }
+  .about-section > * {
+    min-width: 0;
   }
   .about-section p,
   .principles-list {
