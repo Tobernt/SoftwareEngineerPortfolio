@@ -31,7 +31,7 @@
       "shadow": "lifted",
       "buttonStyle": "solid",
       "portrait": "square",
-      "navStyle": "pill",
+      "navStyle": "panel",
       "canvasPattern": "none",
       "componentStyles": {},
       "componentPalettes": {}
@@ -51,11 +51,6 @@
           {
             "selector": "body > main:nth-of-type(1) > section:nth-of-type(2)",
             "target": "sections",
-            "styleId": "component-1"
-          },
-          {
-            "selector": "body > header:nth-of-type(1) > nav:nth-of-type(1)",
-            "target": "navigation",
             "styleId": "component-1"
           }
         ],
