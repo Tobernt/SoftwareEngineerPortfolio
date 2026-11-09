@@ -44,9 +44,17 @@ for (const width of [320, 390, 768, 1024, 1440]) {
           await page.locator('[data-lang-toggle]').click();
           if (width < 1024) await page.locator('[data-menu-toggle]').click();
         }
-        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
-          true,
-        );
+        const overflow = await page.evaluate(() => ({
+          viewport: innerWidth,
+          document: document.documentElement.scrollWidth,
+          elements: [...document.querySelectorAll('body *')]
+            .filter((element) => element.getBoundingClientRect().right > innerWidth + 1)
+            .map((element) => ({ tag: element.tagName, class: element.className })),
+        }));
+        expect(
+          overflow.document,
+          JSON.stringify({ url, language, ...overflow }),
+        ).toBeLessThanOrEqual(width);
         const results = await new AxeBuilder({ page })
           .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
           .analyze();
@@ -85,6 +93,22 @@ test('gallery controls and entered data survive language changes', async ({ page
   await expect(page.locator('[data-modal-dialog]')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator('[data-open-modal]')).toBeFocused();
+});
+
+test('gallery tabs wrap when a wider fallback font is used', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto('/gallery.html');
+  await page.addStyleTag({ content: 'body { font-family: Verdana, sans-serif !important; }' });
+  for (const language of ['en', 'sv']) {
+    if (language === 'sv') {
+      await page.locator('[data-menu-toggle]').click();
+      await page.locator('[data-lang-toggle]').click();
+      await page.locator('[data-menu-toggle]').click();
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      320,
+    );
+  }
 });
 
 test('content and navigation remain available without JavaScript', async ({ browser }) => {

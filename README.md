@@ -42,7 +42,7 @@ Audited on **9 November 2026** against the local production build. The reports d
 | W3C Nu HTML Checker, homepage | No errors, warnings, or informational messages | [Report](docs/evidence/w3c-index.html), [JSON](docs/evidence/w3c-index.json) |
 | W3C Nu HTML Checker, gallery | No errors, warnings, or informational messages | [Report](docs/evidence/w3c-gallery.html), [JSON](docs/evidence/w3c-gallery.json) |
 | Firefox Accessibility Inspector, homepage | All issues checked; zero findings | [Screenshot](docs/evidence/firefox-home.png), [Result](docs/evidence/firefox-home.json) |
-| Playwright and axe | 9 passing tests; no WCAG A/AA automated violations on either page in English or Swedish at 320, 390, 768, 1024, and 1440 pixels | [Test suite](tests/browser/portfolio.spec.cjs) |
+| Playwright and axe | 10 passing tests; no WCAG A/AA automated violations on either page in English or Swedish at 320, 390, 768, 1024, and 1440 pixels | [Test suite](tests/browser/portfolio.spec.cjs) |
 
 ![Lighthouse audit summary](docs/evidence/lighthouse-home.report.png)
 

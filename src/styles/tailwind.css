@@ -313,6 +313,11 @@
   overflow-x: visible;
 }
 
+/* Tab labels can be wider with fallback fonts on Linux or in another locale. */
+[data-tab-list] {
+  flex-wrap: wrap;
+}
+
 @layer components {
   .section-shell {
     @apply py-section border-b border-neutral-800;
