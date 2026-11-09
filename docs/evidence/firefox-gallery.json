@@ -1,0 +1,99 @@
+{
+  "filter": "ALL",
+  "auditError": null,
+  "issueCount": 1,
+  "issues": [
+    [
+      {
+        "role": "heading",
+        "name": "Slider with live value",
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "text leaf",
+        "name": "FEEDBACK",
+        "checks": {
+          "CONTRAST": {
+            "value": 13.001693926945704,
+            "color": [
+              219,
+              234,
+              254,
+              1
+            ],
+            "backgroundColor": [
+              21,
+              34,
+              59,
+              1
+            ],
+            "isLargeText": false,
+            "score": "AAA"
+          },
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "paragraph",
+        "name": null,
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "label",
+        "name": "Choose level",
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "slider",
+        "name": "Choose level",
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": {
+            "score": "FAIL",
+            "issue": "INTERACTIVE_NO_ACTION"
+          },
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "generic",
+        "name": null,
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      },
+      {
+        "role": "generic",
+        "name": null,
+        "checks": {
+          "CONTRAST": null,
+          "KEYBOARD": null,
+          "TEXT_LABEL": null
+        }
+      }
+    ]
+  ],
+  "uiText": "Kontrollera efter problem:\nAlla problem\nSimulera:\nIngen\nVisa tabbningsordning\nRoll\n\t\nNamn\nslider\t\"Choose level\"tangentbord\nKontroller\nTangentbord\n\nInteraktiva element måste kunna aktiveras med ett tangentbord. Läs mer\n\nEgenskaper\nname\n:\n\"Choose level\"\nrole\n:\n\"slider\"\nactions\n:\n[]\nvalue\n:\n\"50 percent\"\nDOMNode\n:\ninput\n#volume\n.w-full.accent-emerald-400.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2.focus-visible:outline-emerald-300\ndescription\n:\n\"\"\nkeyboardShortcut\n:\n\"\"\nchildCount\n:\n0\nindexInParent\n:\n4\nstates\n:\n(4)[…]\nrelations\n:\n{…}\nattributes\n:\n{…}",
+  "browser": "Firefox 159.0.1",
+  "url": "http://127.0.0.1:4173/gallery.html",
+  "sliderKeyboardCheck": {
+    "before": "45",
+    "afterArrowRight": "50",
+    "passed": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "filter": "ALL",
+  "auditError": null,
+  "issueCount": 0,
+  "issues": [],
+  "uiText": "Kontrollera efter problem:\nAlla problem\nSimulera:\nIngen\nVisa tabbningsordning\nRoll\n\t\nNamn\nKontroller\nInga kontroller för denna nod.\nEgenskaper\nname\n:\n\"Tobias Berntsson | Software Engineer | Backend & Automation\"\nrole\n:\n\"document\"\nactions\n:\n[]\nvalue\n:\n\"\"\nDOMNode\n:\n#document\ndescription\n:\n\"\"\nkeyboardShortcut\n:\n\"\"\nchildCount\n:\n4\nindexInParent\n:\n0\nstates\n:\n(7)[…]\nrelations\n:\n{…}\nattributes\n:\n{…}",
+  "browser": "Firefox 159.0.1",
+  "url": "http://127.0.0.1:4173/",
+  "sliderKeyboardCheck": null
+}
