@@ -1,6 +1,7 @@
 function getTranslator() {
   const translate = (key) => window.i18n?.translate(key) ?? key;
-  const format = (key, replacements = {}) => window.i18n?.format(key, replacements) ?? translate(key);
+  const format = (key, replacements = {}) =>
+    window.i18n?.format(key, replacements) ?? translate(key);
   return { format, translate };
 }
 
@@ -49,6 +50,9 @@ function initToggle() {
 }
 
 function initSlider() {
+  // The native range provides Arrow/Home/End keyboard handling. Firefox 159's
+  // inspector flags its empty accessibility action list; the recorded Firefox
+  // keyboard check confirms ArrowRight changes 45 to 50. Keep native semantics.
   const slider = document.querySelector('[data-slider]');
   const output = document.querySelector('[data-slider-value]');
   if (!slider || !output) return;
@@ -59,7 +63,10 @@ function initSlider() {
     const value = slider.value;
     output.textContent = format('slider.value', { value });
     slider.setAttribute('aria-valuetext', format('slider.aria', { value }));
-    slider.setAttribute('aria-label', translate('gallery.slider.label') ?? slider.getAttribute('aria-label'));
+    slider.setAttribute(
+      'aria-label',
+      translate('gallery.slider.label') ?? slider.getAttribute('aria-label'),
+    );
   };
 
   slider.addEventListener('input', sync);
@@ -137,16 +144,9 @@ function initModal() {
   const body = document.body;
   const dragHandle = dialog.querySelector('[data-modal-drag-handle]') || dialog;
 
-  const focusableSelectors = [
-    'a[href]',
-    'button:not([disabled])',
-    'textarea',
-    'input',
-    'select'
-  ];
+  const focusableSelectors = ['a[href]', 'button:not([disabled])', 'textarea', 'input', 'select'];
 
-  const getFocusable = () =>
-    Array.from(dialog.querySelectorAll(focusableSelectors.join(',')));
+  const getFocusable = () => Array.from(dialog.querySelectorAll(focusableSelectors.join(',')));
 
   const setInitialPosition = () => {
     const overlayRect = overlay.getBoundingClientRect();
@@ -219,8 +219,14 @@ function initModal() {
     if (!isDragging) return;
     const overlayRect = overlay.getBoundingClientRect();
     const dialogRect = dialog.getBoundingClientRect();
-    const nextLeft = Math.min(Math.max(dialogStart.x + (event.clientX - dragStart.x), 0), overlayRect.width - dialogRect.width);
-    const nextTop = Math.min(Math.max(dialogStart.y + (event.clientY - dragStart.y), 0), overlayRect.height - dialogRect.height);
+    const nextLeft = Math.min(
+      Math.max(dialogStart.x + (event.clientX - dragStart.x), 0),
+      overlayRect.width - dialogRect.width,
+    );
+    const nextTop = Math.min(
+      Math.max(dialogStart.y + (event.clientY - dragStart.y), 0),
+      overlayRect.height - dialogRect.height,
+    );
     dialog.style.left = `${nextLeft}px`;
     dialog.style.top = `${nextTop}px`;
   };
@@ -271,10 +277,8 @@ function initTabs() {
     });
   };
 
-  tabList.addEventListener('click', (event) => {
-    const target = event.target.closest('[role="tab"]');
-    if (!target) return;
-    setActive(target.dataset.tab);
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => setActive(tab.dataset.tab));
   });
 
   tabList.addEventListener('keydown', (event) => {

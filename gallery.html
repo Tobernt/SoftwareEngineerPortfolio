@@ -1,266 +1,539 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UI Gallery | Tobias Berntsson Portfolio | Component Examples</title>
-  <meta name="description" content="Interactive UI component gallery showcasing accessible, responsive design patterns. Examples include toggles, modals, tabs, forms, and more built with Tailwind CSS.">
-  <meta name="keywords" content="UI components, design system, Tailwind CSS, accessible components, responsive design, web components, frontend examples">
-  <meta name="author" content="Tobias Berntsson">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://tobiasberntssonportfolio.netlify.app/gallery.html">
+  <head>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Gallery | Tobias Berntsson Portfolio | Component Examples</title>
+    <meta
+      name="description"
+      content="Interactive UI component gallery showcasing accessible, responsive design patterns. Examples include toggles, modals, tabs, forms, and more built with Tailwind CSS.">
+    <meta
+      name="keywords"
+      content="UI components, design system, Tailwind CSS, accessible components, responsive design, web components, frontend examples">
+    <meta name="author" content="Tobias Berntsson">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tobernt.github.io/SoftwareEngineerPortfolio/gallery.html">
 
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tobiasberntssonportfolio.netlify.app/gallery.html">
-  <meta property="og:title" content="UI Gallery | Tobias Berntsson Portfolio">
-  <meta property="og:description" content="Interactive UI component gallery showcasing accessible, responsive design patterns built with Tailwind CSS.">
-  <meta property="og:site_name" content="Tobias Berntsson Portfolio">
-  <meta property="og:locale" content="en_US">
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta
+      property="og:url"
+      content="https://tobernt.github.io/SoftwareEngineerPortfolio/gallery.html">
+    <meta property="og:title" content="UI Gallery | Tobias Berntsson Portfolio">
+    <meta
+      property="og:description"
+      content="Interactive UI component gallery showcasing accessible, responsive design patterns built with Tailwind CSS.">
+    <meta property="og:site_name" content="Tobias Berntsson Portfolio">
+    <meta property="og:locale" content="en_US">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="UI Gallery | Tobias Berntsson Portfolio">
-  <meta name="twitter:description" content="Interactive UI component gallery showcasing accessible, responsive design patterns built with Tailwind CSS.">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="UI Gallery | Tobias Berntsson Portfolio">
+    <meta
+      name="twitter:description"
+      content="Interactive UI component gallery showcasing accessible, responsive design patterns built with Tailwind CSS.">
 
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#10b981">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#10b981">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- Preconnect to external resources -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-
-  <link rel="stylesheet" href="assets/styles.css">
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  <script type="module" src="assets/layout.js"></script>
-  <script type="module" src="assets/i18n.js"></script>
-  <script type="module" src="src/components/gallery-components.js"></script>
-  <script type="module" src="src/home.js"></script>
-</head>
-<body class="bg-neutral-900 text-neutral-100" data-page="gallery">
-  <div data-site-header></div>
-
-  <main class="max-w-6xl mx-auto px-6">
-    <section class="py-16 border-b border-neutral-800">
-      <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p class="text-sm font-semibold text-emerald-300 uppercase tracking-wide" data-i18n="gallery.hero.eyebrow">Components</p>
-          <h1 class="text-4xl font-bold text-white" data-i18n="gallery.hero.title">UI gallery</h1>
-          <p class="mt-2 text-neutral-300" data-i18n="gallery.hero.subtitle">Responsive grid with demos and code samples. Built to hop back to the start page easily.</p>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script type="module" src="assets/layout.js"></script>
+    <script type="module" src="assets/i18n.js"></script>
+    <script type="module" src="src/components/gallery-components.js"></script>
+    <script type="module" src="src/home.js"></script>
+  </head>
+  <body class="bg-neutral-900 text-neutral-100" data-page="gallery">
+    <a class="skip-link" href="#main-content"><span data-i18n="skip">Skip to content</span></a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation" data-i18n-aria="nav.label">
+        <a class="site-brand" href="index.html"
+          >Tobias Berntsson<span class="brand-role"
+            ><span data-i18n="brand.role">Software engineer</span></span
+          ></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          data-menu-toggle
+          hidden
+        >
+          <span data-i18n="nav.menu.button">Menu</span> <span aria-hidden="true">☰</span>
+        </button>
+        <div class="site-menu" id="site-menu" data-menu-panel>
+          <ul>
+            <li>
+              <a href="index.html#projects" data-nav-key="projects"
+                ><span data-i18n="nav.projects">Projects</span></a
+              >
+            </li>
+            <li>
+              <a href="index.html#about" data-nav-key="about"
+                ><span data-i18n="nav.about">About</span></a
+              >
+            </li>
+            <li>
+              <a href="index.html#experience" data-nav-key="experience"
+                ><span data-i18n="nav.experience">Experience</span></a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" data-nav-key="gallery" aria-current="page"
+                ><span data-i18n="nav.gallery">UI gallery</span></a
+              >
+            </li>
+            <li>
+              <a href="index.html#contact" data-nav-key="contact"
+                ><span data-i18n="nav.contact">Contact</span></a
+              >
+            </li>
+          </ul>
+          <button
+            class="language-toggle"
+            type="button"
+            data-lang-toggle
+            aria-pressed="false"
+            hidden
+          >
+            Svenska
+          </button>
         </div>
-      </div>
-    </section>
+      </nav>
+    </header>
 
-    <section class="py-16">
-      <div class="space-y-6">
-        <div class="flex flex-wrap items-start justify-between gap-4">
+    <main id="main-content" tabindex="-1" class="max-w-6xl mx-auto px-6">
+      <section class="py-16 border-b border-neutral-800">
+        <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p class="eyebrow" data-i18n="gallery.section.eyebrow">Design systems</p>
-            <h2 class="text-3xl font-bold text-white" data-i18n="gallery.section.title">Interactive components</h2>
-            <p class="text-sm text-neutral-400" data-i18n="gallery.section.subtitle">Grid overview of reusable UI patterns with short code explanations.</p>
+            <p
+              class="text-sm font-semibold text-emerald-300 uppercase tracking-wide"
+              data-i18n="gallery.hero.eyebrow"
+            >
+              Components
+            </p>
+            <h1 class="text-4xl font-bold text-white" data-i18n="gallery.hero.title">UI gallery</h1>
+            <p class="mt-2 text-neutral-300" data-i18n="gallery.hero.subtitle">
+              Responsive grid with demos and code samples. Built to hop back to the start page
+              easily.
+            </p>
           </div>
-          <a class="cta-button-ghost w-full text-center sm:w-auto" href="index.html#projects" data-i18n="gallery.section.cta">Back to projects</a>
         </div>
+      </section>
 
-        <div class="grid gap-6 lg:grid-cols-2">
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.toggle.title">Smooth toggle</h2>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="gallery.toggle.tag">Interactive</span>
+      <section class="py-16">
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p class="eyebrow" data-i18n="gallery.section.eyebrow">Design systems</p>
+              <h2 class="text-3xl font-bold text-white" data-i18n="gallery.section.title">
+                Interactive components
+              </h2>
+              <p class="text-sm text-neutral-400" data-i18n="gallery.section.subtitle">
+                Grid overview of reusable UI patterns with short code explanations.
+              </p>
             </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.toggle.summary">Animated toggle with clear focus state, voiced labels, and ARIA support.</p>
-            <div class="mt-5 flex flex-wrap items-start gap-4">
-              <div class="flex flex-col gap-2">
-                <div class="flex items-center justify-between text-xs font-semibold text-neutral-400" aria-hidden="true">
-                  <span data-toggle-label-off class="transition-colors" data-i18n="toggle.label.off">Disabled</span>
-                  <span data-toggle-label-on class="transition-colors text-neutral-500" data-i18n="toggle.label.on">Enabled</span>
-                </div>
-                <button
-                  type="button"
-                  data-toggle
-                  class="group relative inline-flex h-11 w-28 items-center rounded-full border border-neutral-700 bg-neutral-800/80 transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
-                  aria-pressed="false"
+            <a
+              class="cta-button-ghost w-full text-center sm:w-auto"
+              href="index.html#projects"
+              data-i18n="gallery.section.cta"
+              >Back to projects</a
+            >
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.toggle.title">
+                  Smooth toggle
+                </h2>
+                <span
+                  class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                  data-i18n="gallery.toggle.tag"
+                  >Interactive</span
                 >
-                  <span class="sr-only" data-i18n="gallery.toggle.hidden">Toggle notifications</span>
-                  <span
-                    data-toggle-knob
-                    class="pointer-events-none absolute left-1 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-700 text-xs font-semibold text-neutral-200 transition-all duration-300"
-                  >
-                    On
-                  </span>
-                </button>
               </div>
-              <p class="text-xs text-neutral-400" data-i18n="gallery.toggle.note">Uses <code class="text-emerald-300">aria-pressed</code> to announce the state.</p>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;button aria-pressed="false" class="toggle"&gt;
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.toggle.summary">
+                Animated toggle with clear focus state, voiced labels, and ARIA support.
+              </p>
+              <div class="mt-5 flex flex-wrap items-start gap-4">
+                <div class="flex flex-col gap-2">
+                  <div
+                    class="flex items-center justify-between text-xs font-semibold text-neutral-400"
+                    aria-hidden="true"
+                  >
+                    <span
+                      data-toggle-label-off
+                      class="transition-colors"
+                      data-i18n="toggle.label.off"
+                      >Disabled</span
+                    >
+                    <span
+                      data-toggle-label-on
+                      class="transition-colors text-neutral-500"
+                      data-i18n="toggle.label.on"
+                      >Enabled</span
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    data-toggle
+                    class="group relative inline-flex h-11 w-28 items-center rounded-full border border-neutral-700 bg-neutral-800/80 transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                    aria-pressed="false"
+                  >
+                    <span class="sr-only" data-i18n="gallery.toggle.hidden"
+                      >Toggle notifications</span
+                    >
+                    <span
+                      data-toggle-knob
+                      class="pointer-events-none absolute left-1 top-1 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-700 text-xs font-semibold text-neutral-200 transition-all duration-300"
+                    >
+                      On
+                    </span>
+                  </button>
+                </div>
+                <p class="text-xs text-neutral-400" data-i18n="gallery.toggle.note">
+                  Uses <code class="text-emerald-300">aria-pressed</code> to announce the state.
+                </p>
+              </div>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;button aria-pressed="false" class="toggle"&gt;
   &lt;span class="sr-only"&gt;Toggle notifications&lt;/span&gt;
   &lt;span class="knob"&gt;On&lt;/span&gt;
   &lt;span class="label"&gt;On&lt;/span&gt;
 &lt;/button&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.slider.title">Slider with live value</h2>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="gallery.slider.tag">Feedback</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.slider.summary">Slider updates the value in real time with <code class="text-emerald-300">aria-valuetext</code> and <code class="text-emerald-300">aria-live</code>.</p>
-            <div class="mt-5 flex flex-col gap-3">
-              <label class="text-sm text-neutral-200" for="volume" data-i18n="gallery.slider.label">Choose level</label>
-              <div class="flex items-center gap-3">
-                <input
-                  id="volume"
-                  type="range"
-                  min="0"
-                  max="100"
-                  value="45"
-                  step="5"
-                  data-slider
-                  aria-label="Choose level"
-                  class="w-full accent-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
-                />
-                <span class="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-100" aria-live="polite" data-slider-value></span>
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.slider.title">
+                  Slider with live value
+                </h2>
+                <span
+                  class="pill border-blue-400/40 bg-blue-500/10 text-blue-100"
+                  data-i18n="gallery.slider.tag"
+                  >Feedback</span
+                >
               </div>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;label for="volume"&gt;Choose level&lt;/label&gt;
-&lt;input id="volume" type="range" aria-label="Choose level" /&gt;
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.slider.summary">
+                Slider updates the value in real time with
+                <code class="text-emerald-300">aria-valuetext</code> and
+                <code class="text-emerald-300">aria-live</code>.
+              </p>
+              <div class="mt-5 flex flex-col gap-3">
+                <label
+                  class="text-sm text-neutral-200"
+                  for="volume"
+                  data-i18n="gallery.slider.label"
+                  >Choose level</label
+                >
+                <div class="flex items-center gap-3">
+                  <input
+                    id="volume"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="45"
+                    step="5"
+                    data-slider
+                    class="w-full accent-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300">
+                  <span
+                    class="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-100"
+                    aria-live="polite"
+                    data-slider-value
+                  ></span>
+                </div>
+              </div>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;label for="volume"&gt;Choose level&lt;/label&gt;
+&lt;input id="volume" type="range"  /&gt;
 &lt;span aria-live="polite"&gt;45%&lt;/span&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.gradient.title">Gradient CTA</h2>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="gallery.gradient.tag">Visual</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.gradient.summary">Triggers an animated gradient background with strong contrast and explanatory text.</p>
-            <div class="mt-4 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/70 p-4" data-gradient-card>
-              <p class="text-sm text-neutral-200" data-i18n="gallery.gradient.body">The gradient is WCAG AA tested against text and activates with the button below.</p>
-              <button type="button" data-gradient-toggle class="cta-button-primary" data-i18n="gallery.gradient.button">Activate gradient</button>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;div class="cta" data-gradient-card&gt;...
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.gradient.title">
+                  Gradient CTA
+                </h2>
+                <span
+                  class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                  data-i18n="gallery.gradient.tag"
+                  >Visual</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.gradient.summary">
+                Triggers an animated gradient background with strong contrast and explanatory text.
+              </p>
+              <div
+                class="mt-4 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/70 p-4"
+                data-gradient-card
+              >
+                <p class="text-sm text-neutral-200" data-i18n="gallery.gradient.body">
+                  The button below switches the background gradient on and off.
+                </p>
+                <button
+                  type="button"
+                  data-gradient-toggle
+                  class="cta-button-primary"
+                  data-i18n="gallery.gradient.button"
+                >
+                  Activate gradient
+                </button>
+              </div>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;div class="cta" data-gradient-card&gt;...
   &lt;button data-gradient-toggle&gt;Activate&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.accordion.title">Accordion</h2>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="gallery.accordion.tag">Structure</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.accordion.summary">Expandable panel that toggles height and updates <code class="text-emerald-300">aria-expanded</code>.</p>
-            <div class="mt-5 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
-              <button
-                type="button"
-                data-accordion-button
-                aria-expanded="false"
-                aria-controls="accordion-panel"
-                class="flex w-full items-center justify-between gap-3 text-left text-sm font-semibold text-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.accordion.title">
+                  Accordion
+                </h2>
+                <span
+                  class="pill border-blue-400/40 bg-blue-500/10 text-blue-100"
+                  data-i18n="gallery.accordion.tag"
+                  >Structure</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.accordion.summary">
+                Expandable panel that toggles height and updates
+                <code class="text-emerald-300">aria-expanded</code>.
+              </p>
+              <div
+                class="mt-5 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4"
               >
-                <span data-i18n="gallery.accordion.button">How does the component work?</span>
-                <span class="text-xs text-neutral-400">↕</span>
-              </button>
-              <div class="grid grid-rows-[0fr] transition-all duration-300" data-accordion-panel id="accordion-panel" aria-hidden="true">
-                <div class="overflow-hidden text-sm text-neutral-300" data-i18n="gallery.accordion.copy">
-                  The content collapses via CSS grid row height and automatically keeps the right semantics for screen readers.
+                <button
+                  type="button"
+                  data-accordion-button
+                  aria-expanded="false"
+                  aria-controls="accordion-panel"
+                  class="flex w-full items-center justify-between gap-3 text-left text-sm font-semibold text-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                >
+                  <span data-i18n="gallery.accordion.button">How does the component work?</span>
+                  <span class="text-xs text-neutral-400">↕</span>
+                </button>
+                <div
+                  class="grid grid-rows-[0fr] transition-all duration-300"
+                  data-accordion-panel
+                  id="accordion-panel"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="overflow-hidden text-sm text-neutral-300"
+                    data-i18n="gallery.accordion.copy"
+                  >
+                    The content collapses via CSS grid row height and automatically keeps the right
+                    semantics for screen readers.
+                  </div>
                 </div>
               </div>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;button aria-expanded="false" aria-controls="panel"&gt;Question&lt;/button&gt;
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;button aria-expanded="false" aria-controls="panel"&gt;Question&lt;/button&gt;
 &lt;div id="panel" hidden&gt;Answer&lt;/div&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.modal.title">Modal / lightbox</h2>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="gallery.modal.tag">Overlay</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.modal.summary">Opens via button, closes with overlay, Escape, or button. Focus is trapped inside the dialog.</p>
-            <div class="mt-5 flex items-center gap-4">
-              <button
-                type="button"
-                data-open-modal
-                class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/40 transition hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
-                data-i18n="gallery.modal.button"
-              >
-                Show modal
-              </button>
-              <p class="text-xs text-neutral-400" data-i18n="gallery.modal.note">Backdrop uses <code class="text-emerald-300">role="dialog"</code> and <code class="text-emerald-300">aria-modal="true"</code>.</p>
-            </div>
-            <div
-              class="fixed inset-0 z-30 hidden flex items-center justify-center bg-black/70 px-6"
-              data-modal-overlay
-              role="presentation"
-            >
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.modal.title">
+                  Modal / lightbox
+                </h2>
+                <span
+                  class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                  data-i18n="gallery.modal.tag"
+                  >Overlay</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.modal.summary">
+                Opens via button, closes with overlay, Escape, or button. Focus is trapped inside
+                the dialog.
+              </p>
+              <div class="mt-5 flex items-center gap-4">
+                <button
+                  type="button"
+                  data-open-modal
+                  class="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/40 transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                  data-i18n="gallery.modal.button"
+                >
+                  Show modal
+                </button>
+                <p class="text-xs text-neutral-400" data-i18n="gallery.modal.note">
+                  Backdrop uses <code class="text-emerald-300">role="dialog"</code> and
+                  <code class="text-emerald-300">aria-modal="true"</code>.
+                </p>
+              </div>
               <div
-                role="dialog"
-                aria-modal="true"
-                aria-hidden="true"
-                data-modal-dialog
-                class="w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-900 p-6 shadow-xl shadow-neutral-900/80"
+                class="fixed inset-0 z-30 hidden flex items-center justify-center bg-black/70 px-6"
+                data-modal-overlay
+                role="none"
               >
-                <div class="flex items-start justify-between gap-3 cursor-move" data-modal-drag-handle>
-                  <div>
-                    <p class="text-sm font-semibold text-neutral-100" data-i18n="gallery.modal.header">Lightbox</p>
-                    <p class="text-sm text-neutral-300" data-i18n="gallery.modal.body">Place any content here, such as an image or confirmation.</p>
+                <div
+                  role="dialog"
+                  aria-label="Example dialog"
+                  aria-modal="true"
+                  data-modal-dialog
+                  class="w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-900 p-6 shadow-xl shadow-neutral-900/80"
+                >
+                  <div
+                    class="flex items-start justify-between gap-3 cursor-move"
+                    data-modal-drag-handle
+                  >
+                    <div>
+                      <p
+                        class="text-sm font-semibold text-neutral-100"
+                        data-i18n="gallery.modal.header"
+                      >
+                        Lightbox
+                      </p>
+                      <p class="text-sm text-neutral-300" data-i18n="gallery.modal.body">
+                        Place any content here, such as an image or confirmation.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      data-close-modal
+                      class="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-200 transition hover:border-neutral-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                      data-i18n="gallery.modal.close"
+                    >
+                      Close
+                    </button>
                   </div>
+                </div>
+              </div>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;button data-open-modal&gt;Show modal&lt;/button&gt;
+&lt;div role="dialog" aria-modal="true" hidden&gt;Content&lt;/div&gt;</code></pre>
+            </article>
+
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.tabs.title">
+                  Tabs with keyboard
+                </h2>
+                <span
+                  class="pill border-blue-400/40 bg-blue-500/10 text-blue-100"
+                  data-i18n="gallery.tabs.tag"
+                  >Navigation</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.tabs.summary">
+                Arrow keys move focus between tabs; panels are controlled with
+                <code class="text-emerald-300">aria-controls</code>.
+              </p>
+              <div
+                class="mt-4 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4"
+              >
+                <div class="flex gap-2" role="tablist" aria-label="Case tabs" data-tab-list>
                   <button
                     type="button"
-                    data-close-modal
-                    class="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-200 transition hover:border-neutral-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
-                    data-i18n="gallery.modal.close"
+                    class="pill bg-neutral-800/70"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="tab-one"
+                    data-tab="one"
+                    data-i18n="gallery.tabs.result"
                   >
-                    Close
+                    Results
+                  </button>
+                  <button
+                    type="button"
+                    class="pill"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-two"
+                    data-tab="two"
+                    data-i18n="gallery.tabs.code"
+                  >
+                    Code
+                  </button>
+                  <button
+                    type="button"
+                    class="pill"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-three"
+                    data-tab="three"
+                    data-i18n="gallery.tabs.process"
+                  >
+                    Process
                   </button>
                 </div>
+                <div
+                  class="space-y-2 text-sm text-neutral-300"
+                  data-tab-panel
+                  id="tab-one"
+                  role="tabpanel"
+                  data-i18n="gallery.tabs.resultCopy"
+                >
+                  This panel can hold a short summary of a project outcome.
+                </div>
+                <div
+                  class="hidden space-y-2 text-sm text-neutral-300"
+                  data-tab-panel
+                  id="tab-two"
+                  role="tabpanel"
+                  data-i18n="gallery.tabs.codeCopy"
+                >
+                  Component uses <code class="text-emerald-300">dataset.tab</code> and lean Tailwind
+                  classes.
+                </div>
+                <div
+                  class="hidden space-y-2 text-sm text-neutral-300"
+                  data-tab-panel
+                  id="tab-three"
+                  role="tabpanel"
+                  data-i18n="gallery.tabs.processCopy"
+                >
+                  This panel can describe the implementation process and technical choices.
+                </div>
               </div>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;button data-open-modal&gt;Show modal&lt;/button&gt;
-&lt;div role="dialog" aria-modal="true" hidden&gt;Content&lt;/div&gt;</code></pre>
-          </article>
-
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.tabs.title">Tabs with keyboard</h2>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="gallery.tabs.tag">Navigation</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.tabs.summary">Arrow keys move focus between tabs; panels are controlled with <code class="text-emerald-300">aria-controls</code>.</p>
-            <div class="mt-4 space-y-3 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
-              <div class="flex gap-2" role="tablist" aria-label="Case tabs" data-tab-list>
-                <button type="button" class="pill bg-neutral-800/70" role="tab" aria-selected="true" aria-controls="tab-one" data-tab="one" data-i18n="gallery.tabs.result">Results</button>
-                <button type="button" class="pill" role="tab" aria-selected="false" aria-controls="tab-two" data-tab="two" data-i18n="gallery.tabs.code">Code</button>
-                <button type="button" class="pill" role="tab" aria-selected="false" aria-controls="tab-three" data-tab="three" data-i18n="gallery.tabs.process">Process</button>
-              </div>
-              <div class="space-y-2 text-sm text-neutral-300" data-tab-panel id="tab-one" role="tabpanel" data-i18n="gallery.tabs.resultCopy">Automated regression tests delivered 12% more features without bug reports.</div>
-              <div class="hidden space-y-2 text-sm text-neutral-300" data-tab-panel id="tab-two" role="tabpanel" data-i18n="gallery.tabs.codeCopy">Component uses <code class="text-emerald-300">dataset.tab</code> and lean Tailwind classes.</div>
-              <div class="hidden space-y-2 text-sm text-neutral-300" data-tab-panel id="tab-three" role="tabpanel" data-i18n="gallery.tabs.processCopy">Pairing sessions plus lightweight RFCs kept stakeholders aligned.</div>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;div role="tablist"&gt;
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;div role="tablist"&gt;
   &lt;button role="tab" aria-selected="true" aria-controls="panel-1"&gt;Tab 1&lt;/button&gt;
   &lt;button role="tab" aria-selected="false" aria-controls="panel-2"&gt;Tab 2&lt;/button&gt;
 &lt;/div&gt;
 &lt;div id="panel-1" role="tabpanel"&gt;Content 1&lt;/div&gt;
 &lt;div id="panel-2" role="tabpanel" hidden&gt;Content 2&lt;/div&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.form.title">Form with validation</h2>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="gallery.form.tag">Form</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.form.summary">Form shows validation feedback and stops submission until inputs are correct.</p>
-            <form class="mt-5 space-y-3" data-demo-form novalidate>
-              <label class="text-sm text-neutral-200" for="email-demo" data-i18n="gallery.form.email">Work email
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.form.title">
+                  Form with validation
+                </h2>
+                <span
+                  class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                  data-i18n="gallery.form.tag"
+                  >Form</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.form.summary">
+                Form shows validation feedback and stops submission until inputs are correct.
+              </p>
+              <form class="mt-5 space-y-3" data-demo-form novalidate>
+                <label class="text-sm text-neutral-200" for="email-demo"
+                  ><span data-i18n="gallery.form.email">Work email</span></label
+                >
                 <input
                   class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100"
                   id="email-demo"
                   name="email-demo"
                   type="email"
-                  required
-                />
-              </label>
-              <label class="text-sm text-neutral-200" for="role" data-i18n="gallery.form.role">Role
+                  required>
+                <label class="text-sm text-neutral-200" for="role"
+                  ><span data-i18n="gallery.form.role">Role</span></label
+                >
                 <select
                   class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100"
                   id="role"
@@ -272,13 +545,16 @@
                   <option value="designer" data-i18n="gallery.form.designer">Designer</option>
                   <option value="manager" data-i18n="gallery.form.manager">Product/Project</option>
                 </select>
-              </label>
-              <div class="flex items-center gap-3">
-                <button type="submit" class="cta-button-primary" data-i18n="gallery.form.submit">Validate</button>
-                <span class="text-xs text-neutral-400" data-form-feedback></span>
-              </div>
-            </form>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;form novalidate&gt;
+                <div class="flex items-center gap-3">
+                  <button type="submit" class="cta-button-primary" data-i18n="gallery.form.submit">
+                    Validate
+                  </button>
+                  <span class="text-xs text-neutral-400" data-form-feedback></span>
+                </div>
+              </form>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;form novalidate&gt;
   &lt;label for="email"&gt;Email
     &lt;input type="email" id="email" required /&gt;
   &lt;/label&gt;
@@ -287,53 +563,130 @@
   &lt;/label&gt;
   &lt;button type="submit"&gt;Validate&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.copy.title">Copy code block</h2>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="gallery.copy.tag">Productivity</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.copy.summary">Copy button grabs code content and announces success for the user.</p>
-            <div class="mt-4 space-y-2 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
+            <article class="card-panel">
               <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <p class="text-sm font-semibold text-neutral-100" data-i18n="gallery.copy.label">API client</p>
-                <button type="button" class="pill" data-copy-code data-code-target="code-snippet" data-i18n="gallery.copy.button">Copy code</button>
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.copy.title">
+                  Copy code block
+                </h2>
+                <span
+                  class="pill border-blue-400/40 bg-blue-500/10 text-blue-100"
+                  data-i18n="gallery.copy.tag"
+                  >Productivity</span
+                >
               </div>
-              <pre id="code-snippet" class="overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200"><code>fetch("/api/data")
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.copy.summary">
+                Copy button grabs code content and announces success for the user.
+              </p>
+              <div
+                class="mt-4 space-y-2 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4"
+              >
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-sm font-semibold text-neutral-100" data-i18n="gallery.copy.label">
+                    API client
+                  </p>
+                  <button
+                    type="button"
+                    class="pill"
+                    data-copy-code
+                    data-code-target="code-snippet"
+                    data-i18n="gallery.copy.button"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre
+                  id="code-snippet"
+                  class="overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200"
+                ><code>fetch("/api/data")
   .then((res) =&gt; res.json())
   .then(console.log);
 </code></pre>
-              <p class="text-xs text-neutral-400" data-copy-status></p>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;button data-copy-code data-code-target="snippet"&gt;Copy&lt;/button&gt;
+                <p class="text-xs text-neutral-400" data-copy-status></p>
+              </div>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;button data-copy-code data-code-target="snippet"&gt;Copy&lt;/button&gt;
 &lt;pre id="snippet"&gt;&lt;code&gt;// Your code here&lt;/code&gt;&lt;/pre&gt;
 &lt;p data-copy-status&gt;&lt;/p&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.contactForm.title">Contact form</h2>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="gallery.contactForm.tag">WCAG tested</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.contactForm.summary">Preview only: nothing is saved or sent. Use <a href="mailto:tobias_berntsson@hotmail.com" class="text-emerald-300 underline">Contact me</a> to reach out for real.</p>
-            <form class="mt-4 space-y-4 rounded-2xl border border-neutral-800 bg-neutral-900/70 p-6" id="contact-form" novalidate>
-              <label class="block text-sm text-neutral-200" for="name" data-i18n="gallery.contactForm.name">Name
-                <input class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100" id="name" name="name" required />
-              </label>
-              <label class="block text-sm text-neutral-200" for="email" data-i18n="gallery.contactForm.email">Email
-                <input class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100" id="email" name="email" type="email" required />
-              </label>
-              <label class="block text-sm text-neutral-200" for="message" data-i18n="gallery.contactForm.message">What do you want to achieve?
-                <textarea class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100" id="message" name="message" rows="4" required></textarea>
-              </label>
-              <p class="text-xs text-neutral-400" data-i18n="gallery.contactForm.note">This is a demo form to show validation and focus behavior.</p>
-              <div class="flex flex-wrap gap-3">
-                <button type="submit" class="cta-button-primary" data-i18n="gallery.contactForm.submit">Send</button>
-                <div class="text-sm text-emerald-200" role="status" aria-live="polite" data-form-status></div>
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.contactForm.title">
+                  Contact form
+                </h2>
+                <span
+                  class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                  data-i18n="gallery.contactForm.tag"
+                  >Form example</span
+                >
               </div>
-            </form>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>&lt;form id="contact-form" novalidate&gt;
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.contactForm.summary">
+                Preview only: nothing is saved or sent. Use
+                <a href="mailto:tobias_berntsson@hotmail.com" class="text-emerald-300 underline"
+                  >Contact me</a
+                >
+                to reach out for real.
+              </p>
+              <form
+                class="mt-4 space-y-4 rounded-2xl border border-neutral-800 bg-neutral-900/70 p-6"
+                id="contact-form"
+                novalidate
+              >
+                <label class="block text-sm text-neutral-200" for="name"
+                  ><span data-i18n="gallery.contactForm.name">Name</span></label
+                >
+                <input
+                  class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100"
+                  id="name"
+                  name="name"
+                  type="text"
+                  required>
+                <label class="block text-sm text-neutral-200" for="email"
+                  ><span data-i18n="gallery.contactForm.email">Email</span></label
+                >
+                <input
+                  class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100"
+                  id="email"
+                  name="email"
+                  type="email"
+                  required>
+                <label class="block text-sm text-neutral-200" for="message"
+                  ><span data-i18n="gallery.contactForm.message"
+                    >What do you want to achieve?</span
+                  ></label
+                >
+                <textarea
+                  class="mt-2 w-full rounded-lg border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-neutral-100"
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                ></textarea>
+                <p class="text-xs text-neutral-400" data-i18n="gallery.contactForm.note">
+                  This is a demo form to show validation and focus behavior.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                  <button
+                    type="submit"
+                    class="cta-button-primary"
+                    data-i18n="gallery.contactForm.submit"
+                  >
+                    Send
+                  </button>
+                  <div
+                    class="text-sm text-emerald-200"
+                    role="status"
+                    aria-live="polite"
+                    data-form-status
+                  ></div>
+                </div>
+              </form>
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>&lt;form id="contact-form" novalidate&gt;
   &lt;label for="name"&gt;Name
     &lt;input id="name" required /&gt;
   &lt;/label&gt;
@@ -345,37 +698,80 @@
   &lt;/label&gt;
   &lt;button type="submit"&gt;Send&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-          </article>
+            </article>
 
-          <article class="card-panel">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 class="text-xl font-semibold text-white" data-i18n="gallery.clock.title">Live local time</h2>
-              <span class="pill border-emerald-400/60 bg-emerald-400/10 text-emerald-100" data-i18n="gallery.clock.tag">Live</span>
-            </div>
-            <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.clock.summary">Real-time clock using the <code class="text-emerald-300">Intl.DateTimeFormat</code> API with auto-refresh every second.</p>
-            <div class="mt-5 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-xl shadow-emerald-500/20 space-y-4">
-              <div class="flex items-center justify-between gap-3">
-                <div>
-                  <p class="text-sm font-semibold text-neutral-100" data-i18n="gallery.clock.label">Current local time</p>
-                  <p class="text-xs text-neutral-400" data-i18n="gallery.clock.note">Updates every second with a manual refresh option.</p>
+            <article class="card-panel">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-white" data-i18n="gallery.clock.title">
+                  Live local time
+                </h2>
+                <span
+                  class="pill border-emerald-400/60 bg-emerald-400/10 text-emerald-100"
+                  data-i18n="gallery.clock.tag"
+                  >Live</span
+                >
+              </div>
+              <p class="mt-3 text-sm text-neutral-300" data-i18n="gallery.clock.summary">
+                Real-time clock using the
+                <code class="text-emerald-300">Intl.DateTimeFormat</code> API with auto-refresh
+                every second.
+              </p>
+              <div
+                class="mt-5 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-xl shadow-emerald-500/20 space-y-4"
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <div>
+                    <p
+                      class="text-sm font-semibold text-neutral-100"
+                      data-i18n="gallery.clock.label"
+                    >
+                      Current local time
+                    </p>
+                    <p class="text-xs text-neutral-400" data-i18n="gallery.clock.note">
+                      Updates every second with a manual refresh option.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-center justify-between rounded-xl border border-neutral-800 bg-neutral-950/70 px-4 py-5"
+                >
+                  <div class="space-y-1">
+                    <p class="text-sm text-neutral-400" data-i18n="gallery.clock.timeLabel">
+                      Local time
+                    </p>
+                    <p class="text-2xl font-semibold text-white" data-local-time>--:--:--</p>
+                  </div>
+                  <button
+                    type="button"
+                    data-refresh-clock
+                    class="rounded-full border border-emerald-400/60 bg-emerald-500 px-4 py-2 text-sm font-semibold text-neutral-950 shadow-glow-emerald transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                    data-i18n="gallery.clock.refresh"
+                  >
+                    Refresh
+                  </button>
+                </div>
+                <p
+                  class="text-xs text-neutral-400"
+                  data-clock-status
+                  data-i18n="gallery.clock.waiting"
+                >
+                  Waiting for the next tick…
+                </p>
+                <div
+                  class="rounded-xl border border-neutral-800 bg-neutral-950/60 p-4 text-xs text-neutral-200 space-y-2"
+                >
+                  <p class="font-semibold text-neutral-100" data-i18n="gallery.clock.howTitle">
+                    How it works
+                  </p>
+                  <p data-i18n="gallery.clock.howBody">
+                    The clock uses the <code class="text-emerald-300">Intl.DateTimeFormat</code> API
+                    to read your device time and re-render it without a page reload.
+                  </p>
                 </div>
               </div>
-              <div class="flex items-center justify-between rounded-xl border border-neutral-800 bg-neutral-950/70 px-4 py-5">
-                <div class="space-y-1">
-                  <p class="text-sm text-neutral-400" data-i18n="gallery.clock.timeLabel">Local time</p>
-                  <p class="text-2xl font-semibold text-white" data-local-time>--:--:--</p>
-                </div>
-                <button type="button" data-refresh-clock class="rounded-full border border-emerald-400/60 bg-emerald-500 px-4 py-2 text-sm font-semibold text-neutral-950 shadow-glow-emerald transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300" data-i18n="gallery.clock.refresh">
-                  Refresh
-                </button>
-              </div>
-              <p class="text-xs text-neutral-400" data-clock-status data-i18n="gallery.clock.waiting">Waiting for the next tick…</p>
-              <div class="rounded-xl border border-neutral-800 bg-neutral-950/60 p-4 text-xs text-neutral-200 space-y-2">
-                <p class="font-semibold text-neutral-100" data-i18n="gallery.clock.howTitle">How it works</p>
-                <p data-i18n="gallery.clock.howBody">The clock uses the <code class="text-emerald-300">Intl.DateTimeFormat</code> API to read your device time and re-render it without a page reload.</p>
-              </div>
-            </div>
-            <pre class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"><code>const formatTime = (date) =&gt;
+              <pre
+                                class="mt-4 overflow-x-auto rounded-xl bg-neutral-950/60 p-4 text-xs text-neutral-200 whitespace-pre-wrap"
+              ><code>const formatTime = (date) =&gt;
   new Intl.DateTimeFormat([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -386,12 +782,30 @@
 setInterval(() =&gt; {
   clock.textContent = formatTime(new Date());
 }, 1000);</code></pre>
-          </article>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>
+          <strong>Tobias Berntsson</strong><br><span data-i18n="footer.subtitle"
+            >Software engineering · Backend · Automation</span
+          >
+        </p>
+        <div class="footer-links">
+          <a href="mailto:tobias_berntsson@hotmail.com"
+            ><span data-i18n="footer.email">Email Tobias</span></a
+          >
+          <a href="https://www.linkedin.com/in/tobias-berntsson/">LinkedIn</a>
+          <a href="https://github.com/Tobernt">GitHub</a>
+          <a href="https://github.com/Tobernt/SoftwareEngineerPortfolio"
+            ><span data-i18n="footer.source">Website source</span></a
+          >
         </div>
       </div>
-    </section>
-  </main>
-
-  <div data-site-footer></div>
-</body>
+    </footer>
+  </body>
 </html>

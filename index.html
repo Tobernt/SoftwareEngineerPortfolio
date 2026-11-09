@@ -1,371 +1,672 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tobias Berntsson | Full-Stack Developer | Python, C#, JavaScript</title>
-  <meta name="description" content="Full-stack developer specializing in Python, C#, JavaScript, and SQL. Experienced in automation, data pipelines, CI/CD, and building accessible web applications. Available for remote work.">
-  <meta name="keywords" content="full-stack developer, software engineer, Python developer, C# developer, JavaScript developer, remote developer, automation engineer, web developer, Sweden, Olofström">
-  <meta name="author" content="Tobias Berntsson">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://tobiasberntssonportfolio.netlify.app/">
+  <head>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobias Berntsson | Software Engineer | Backend &amp; Automation</title>
+    <meta
+      name="description"
+      content="Tobias Berntsson, software engineer in Sweden. Backend development, internal systems, and automation with Python, C#, JavaScript, and SQL.">
+    <meta name="author" content="Tobias Berntsson">
+    <meta name="theme-color" content="#0c0d11">
+    <link rel="canonical" href="https://tobernt.github.io/SoftwareEngineerPortfolio/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tobias Berntsson | Software Engineer">
+    <meta
+      property="og:description"
+      content="Backend development, internal systems, and automation. Python, C#, JavaScript, and SQL.">
+    <meta property="og:url" content="https://tobernt.github.io/SoftwareEngineerPortfolio/">
+    <meta
+      property="og:image"
+      content="https://tobernt.github.io/SoftwareEngineerPortfolio/assets/tobias-berntsson.png">
+    <meta property="og:image:alt" content="Portrait of Tobias Berntsson">
+    <meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script type="module" src="assets/layout.js"></script>
+    <script type="module" src="assets/i18n.js"></script>
+    <script type="module" src="assets/contact.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Tobias Berntsson",
+        "jobTitle": "Software Engineer",
+        "url": "https://tobernt.github.io/SoftwareEngineerPortfolio/",
+        "image": "https://tobernt.github.io/SoftwareEngineerPortfolio/assets/tobias-berntsson.png",
+        "knowsAbout": [
+          "Python",
+          "C#",
+          "JavaScript",
+          "SQL",
+          "Flask",
+          "PowerShell",
+          "Software engineering",
+          "Automation"
+        ],
+        "sameAs": ["https://github.com/Tobernt", "https://www.linkedin.com/in/tobias-berntsson/"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Olofström",
+          "addressCountry": "SE"
+        }
+      }
+    </script>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main-content"><span data-i18n="skip">Skip to content</span></a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation" data-i18n-aria="nav.label">
+        <a class="site-brand" href="index.html"
+          >Tobias Berntsson<span class="brand-role"
+            ><span data-i18n="brand.role">Software engineer</span></span
+          ></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          data-menu-toggle
+          hidden
+        >
+          <span data-i18n="nav.menu.button">Menu</span> <span aria-hidden="true">☰</span>
+        </button>
+        <div class="site-menu" id="site-menu" data-menu-panel>
+          <ul>
+            <li>
+              <a href="#projects" data-nav-key="projects"
+                ><span data-i18n="nav.projects">Projects</span></a
+              >
+            </li>
+            <li>
+              <a href="#about" data-nav-key="about"><span data-i18n="nav.about">About</span></a>
+            </li>
+            <li>
+              <a href="#experience" data-nav-key="experience"
+                ><span data-i18n="nav.experience">Experience</span></a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" data-nav-key="gallery"
+                ><span data-i18n="nav.gallery">UI gallery</span></a
+              >
+            </li>
+            <li>
+              <a href="#contact" data-nav-key="contact"
+                ><span data-i18n="nav.contact">Contact</span></a
+              >
+            </li>
+          </ul>
+          <button
+            class="language-toggle"
+            type="button"
+            data-lang-toggle
+            aria-pressed="false"
+            hidden
+          >
+            Svenska
+          </button>
+        </div>
+      </nav>
+    </header>
 
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tobiasberntssonportfolio.netlify.app/">
-  <meta property="og:title" content="Tobias Berntsson | Full-Stack Developer">
-  <meta property="og:description" content="Full-stack developer specializing in Python, C#, JavaScript, and SQL. Building accessible products that deliver measurable impact.">
-  <meta property="og:site_name" content="Tobias Berntsson Portfolio">
-  <meta property="og:locale" content="en_US">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Tobias Berntsson | Full-Stack Developer">
-  <meta name="twitter:description" content="Full-stack developer specializing in Python, C#, JavaScript, and SQL. Building accessible products that deliver measurable impact.">
-
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#10b981">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- Preconnect to external resources -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Tobias Berntsson",
-    "url": "https://tobiasberntssonportfolio.netlify.app/",
-    "jobTitle": "Full-Stack Developer",
-    "description": "Full-stack developer focused on automation, data security, and clear communication between engineering and the business.",
-    "knowsAbout": ["Python", "C#", "JavaScript", "SQL", "Flutter", "Flask", "Tailwind CSS", "Unity", "CI/CD", "DevOps", "PostgreSQL", "Redis"],
-    "sameAs": [],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Olofström",
-      "addressCountry": "Sweden"
-    },
-    "workLocation": {
-      "@type": "Place",
-      "name": "Remote"
-    }
-  }
-  </script>
-
-  <link rel="stylesheet" href="assets/styles.css">
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  <script type="module" src="assets/layout.js"></script>
-  <script type="module" src="assets/i18n.js"></script>
-</head>
-<body class="bg-neutral-900 text-neutral-100" data-page="home">
-  <div data-site-header></div>
-
-  <main class="max-w-6xl mx-auto px-6">
-    <section id="hero" class="section-shell relative overflow-hidden">
-      <div class="absolute inset-0 -z-10 bg-grid-slate bg-[length:22px_22px] opacity-30"></div>
-      <div class="absolute inset-0 -z-10 bg-radial-spot"></div>
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div class="space-y-6">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Full-stack developer & problem solver</p>
-          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl" data-i18n="hero.title">
-            I build accessible products that deliver measurable impact.
-          </h1>
-          <p class="text-lg text-neutral-300" data-i18n="hero.lead">
-            Full-stack developer focused on automation, data security, and clear communication between engineering and the business. I build and maintain systems in Python, C#, JavaScript, and SQL—taking them from prototype to production.
+    <main id="main-content" class="max-w-6xl mx-auto px-6" tabindex="-1">
+      <section id="hero" class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span data-i18n="hero.eyebrow">Tobias Berntsson · Software engineer</span>
           </p>
-          <div class="flex flex-wrap items-center gap-4">
-            <a class="cta-button-primary" href="#contact" data-i18n="hero.ctaPrimary">Book a short call</a>
-            <a class="cta-button-ghost" href="gallery.html" data-i18n="hero.ctaSecondary">Explore the UI gallery</a>
+          <h1 id="hero-title" class="hero-title">
+            <span data-i18n="hero.title"
+              >Software engineering, from problem to working system.</span
+            >
+          </h1>
+          <p class="hero-lead">
+            <span data-i18n="hero.lead"
+              >I build backend services, internal tools, and automations in Python and C#. My work
+              connects application code, data, and day-to-day operations, with a focus on
+              maintainable software and clear technical decisions.</span
+            >
+          </p>
+          <div class="hero-actions">
+            <a class="cta-button-primary" href="#projects"
+              ><span data-i18n="hero.projects">View selected work</span>
+              <span aria-hidden="true">→</span></a
+            >
+            <a class="cta-button-ghost" href="#contact"
+              ><span data-i18n="hero.contact">Get in touch</span></a
+            >
           </div>
-          <div class="flex flex-wrap gap-4 text-sm text-neutral-300">
-            <span class="pill border-emerald-400/60 bg-emerald-400/10 text-emerald-100" data-i18n="hero.tag.location">Olofström</span>
-            <span class="pill border-blue-400/60 bg-blue-500/10 text-blue-100" data-i18n="hero.tag.availability">Open for projects</span>
-            <span class="pill border-neutral-700 bg-neutral-800/70" data-i18n="hero.tag.remote">Remote-first</span>
-          </div>
+          <p class="hero-stack">
+            <span data-i18n="hero.stack">Python / C# / JavaScript / SQL</span>
+          </p>
         </div>
-        <div class="grid gap-4">
-          <div class="card-panel space-y-3">
-            <p class="text-sm font-semibold text-neutral-100" data-i18n="hero.focus.title">Focus areas</p>
-            <ul class="space-y-2 text-neutral-200">
-              <li class="flex items-start gap-3" data-i18n="hero.focus.design"><span class="mt-1 h-2 w-2 rounded-full bg-emerald-400"></span>Design systems in Tailwind with audit trails and documentation.</li>
-              <li class="flex items-start gap-3" data-i18n="hero.focus.data"><span class="mt-1 h-2 w-2 rounded-full bg-blue-500"></span>Data pipelines with contract tests, observability, and rollback plans.</li>
-              <li class="flex items-start gap-3" data-i18n="hero.focus.experiments"><span class="mt-1 h-2 w-2 rounded-full bg-emerald-400"></span>Product-led experiments with clear KPIs and insight dashboards.</li>
-            </ul>
+        <aside class="profile-aside" aria-labelledby="profile-heading">
+          <div class="portrait-frame">
+            <img
+              class="profile-portrait"
+              src="assets/tobias-berntsson.png"
+              alt="Portrait of Tobias Berntsson"
+              data-i18n-alt="profile.alt"
+              width="592"
+              height="861"
+              fetchpriority="high"
+              decoding="async">
           </div>
-          <div class="grid gap-4 sm:grid-cols-3">
-            <div class="rounded-xl border border-emerald-500/30 bg-emerald-400/10 px-4 py-3 shadow-glow-emerald">
-              <p class="text-2xl font-bold text-emerald-200" data-i18n="hero.summary.fullstack">Full-stack</p>
-              <p class="text-xs text-emerald-50/80" data-i18n="hero.summary.fullstackCopy">Python, C#, JavaScript, SQL, and Flutter in production.</p>
-            </div>
-            <div class="rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-3 shadow-glow-blue">
-              <p class="text-2xl font-bold text-blue-100" data-i18n="hero.summary.automation">Automation</p>
-              <p class="text-xs text-blue-50/80" data-i18n="hero.summary.automationCopy">CI/CD, data quality, and scripts that reduce manual work.</p>
-            </div>
-            <div class="rounded-xl border border-neutral-700 bg-neutral-900/80 px-4 py-3">
-              <p class="text-2xl font-bold text-neutral-50" data-i18n="hero.summary.remote">Remote-first</p>
-              <p class="text-xs text-neutral-300" data-i18n="hero.summary.remoteCopy">Experienced with distributed teams and clear documentation.</p>
-            </div>
+          <div class="profile-facts">
+            <h2 id="profile-heading"><span data-i18n="profile.title">Engineering focus</span></h2>
+            <p>
+              <span data-i18n="profile.focus"
+                >Backend systems · Automation · System integration</span
+              >
+            </p>
+            <dl>
+              <div>
+                <dt><span data-i18n="profile.locationLabel">Based in</span></dt>
+                <dd><span data-i18n="profile.location">Olofström, Sweden</span></dd>
+              </div>
+              <div>
+                <dt><span data-i18n="profile.languagesLabel">Languages</span></dt>
+                <dd><span data-i18n="profile.languages">Swedish &amp; English</span></dd>
+              </div>
+            </dl>
           </div>
-        </div>
-      </div>
-    </section>
+        </aside>
+      </section>
 
-    <section id="about" class="section-shell">
-      <div class="grid gap-8 lg:grid-cols-3 lg:items-start">
-        <div class="lg:col-span-1 space-y-2">
-          <p class="eyebrow" data-i18n="about.eyebrow">Profile</p>
-          <h2 class="text-3xl font-bold text-white" data-i18n="about.title">About me</h2>
-          <p class="text-neutral-300" data-i18n="about.subtitle">Curious generalist who thrives between product, data, and design.</p>
+      <section id="projects" class="section-shell" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span data-i18n="projects.eyebrow">Selected work</span></p>
+            <h2 id="projects-title" class="section-title">
+              <span data-i18n="projects.title">Systems with a practical purpose.</span>
+            </h2>
+          </div>
+          <p class="section-intro">
+            <span data-i18n="projects.intro"
+              >Application development, systems architecture, and automation across project and
+              professional work.</span
+            >
+          </p>
         </div>
-        <div class="lg:col-span-2 space-y-4">
-          <div class="card-panel">
-            <p class="text-neutral-200" data-i18n="about.body">
-              Versatile full-stack developer with a background in media data, automation, and system integration. I work closely with both instructors and end users, write code that is easy to debug, and ensure processes are measurable and documented.
+        <div class="grid gap-5 md:grid-cols-2">
+          <article class="card-panel project-card">
+            <p class="project-category">
+              <span data-i18n="project.expense.category">Backend / full stack</span>
+            </p>
+            <h3 class="text-xl font-semibold text-white">
+              <span data-i18n="project.expense.title">Internal expense system</span>
+            </h3>
+            <p>
+              <span data-i18n="project.expense.summary"
+                >An internal application that brings expense handling, authentication, and stored
+                data into one structured workflow.</span
+              >
+            </p>
+            <p class="project-detail">
+              <span data-i18n="project.expense.detail"
+                >Built with Flask and SQLite, with secure login and a clear separation between
+                application logic and data storage.</span
+              >
+            </p>
+            <p class="project-stack">
+              <span data-i18n="project.expense.stack"
+                >Flask · Python · SQLite · Authentication</span
+              >
+            </p>
+          </article>
+          <article class="card-panel project-card">
+            <p class="project-category">
+              <span data-i18n="project.multiplayer.category">Systems / C#</span>
+            </p>
+            <h3 class="text-xl font-semibold text-white">
+              <span data-i18n="project.multiplayer.title">Modular multiplayer architecture</span>
+            </h3>
+            <p>
+              <span data-i18n="project.multiplayer.summary"
+                >A multiplayer system and toolchain built around reusable components and custom
+                networking logic.</span
+              >
+            </p>
+            <p class="project-detail">
+              <span data-i18n="project.multiplayer.detail"
+                >Developed in C# and Unity; the architecture also formed the basis of my software
+                development capstone project.</span
+              >
+            </p>
+            <p class="project-stack">
+              <span data-i18n="project.multiplayer.stack"
+                >C# · Unity · Networking · Modular design</span
+              >
+            </p>
+          </article>
+          <article class="card-panel project-card">
+            <p class="project-category">
+              <span data-i18n="project.video.category">Automation / Python</span>
+            </p>
+            <h3 class="text-xl font-semibold text-white">
+              <span data-i18n="project.video.title">AI video processing pipeline</span>
+            </h3>
+            <p>
+              <span data-i18n="project.video.summary"
+                >A Python project that coordinates AI-driven video processing and repeatable
+                production steps.</span
+              >
+            </p>
+            <p class="project-detail">
+              <span data-i18n="project.video.detail"
+                >Focus: practical workflow control, integration between tools, and reducing
+                repetitive manual work.</span
+              >
+            </p>
+            <p class="project-stack">
+              <span data-i18n="project.video.stack"
+                >Python · Workflow automation · Integrations</span
+              >
+            </p>
+          </article>
+          <article class="card-panel project-card">
+            <p class="project-category">
+              <span data-i18n="project.operations.category">Enterprise / PowerShell</span>
+            </p>
+            <h3 class="text-xl font-semibold text-white">
+              <span data-i18n="project.operations.title">Operational automation</span>
+            </h3>
+            <p>
+              <span data-i18n="project.operations.summary"
+                >Scripts and CLI tools for provisioning, queue handling, and reporting in hybrid
+                Exchange environments.</span
+              >
+            </p>
+            <p class="project-detail">
+              <span data-i18n="project.operations.detail"
+                >At Cognizant, reporting tools reduced a process that took hours to minutes while
+                supporting global operations teams.</span
+              >
+            </p>
+            <p class="project-stack">
+              <span data-i18n="project.operations.stack"
+                >PowerShell · Exchange · CLI tooling · Operations</span
+              >
+            </p>
+          </article>
+        </div>
+        <a class="text-link" href="gallery.html"
+          ><span data-i18n="projects.gallery">Explore the UI gallery</span>
+          <span aria-hidden="true">→</span></a
+        >
+      </section>
+
+      <section id="about" class="section-shell about-section" aria-labelledby="about-title">
+        <div>
+          <p class="eyebrow"><span data-i18n="about.eyebrow">How I work</span></p>
+          <h2 id="about-title" class="section-title">
+            <span data-i18n="about.title">Build it. Understand it. Keep it maintainable.</span>
+          </h2>
+        </div>
+        <div class="space-y-5">
+          <p>
+            <span data-i18n="about.body"
+              >My background spans software development, enterprise operations, and data workflows.
+              That combination helps me look beyond individual features: how a system is used, how
+              it fails, and how the next person will maintain it.</span
+            >
+          </p>
+          <p>
+            <span data-i18n="about.delivery"
+              >I take responsibility from understanding a need to implementing the solution. I work
+              close to users and colleagues, review code, debug across system boundaries, and
+              document the decisions that matter.</span
+            >
+          </p>
+          <ul class="principles-list">
+            <li>
+              <span data-i18n="about.principle1"
+                >Clear application structure and explicit data handling.</span
+              >
+            </li>
+            <li>
+              <span data-i18n="about.principle2"
+                >Automation that removes recurring operational friction.</span
+              >
+            </li>
+            <li>
+              <span data-i18n="about.principle3"
+                >Code review, debugging, and useful technical documentation.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="experience" class="section-shell" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span data-i18n="experience.eyebrow">Experience</span></p>
+            <h2 id="experience-title" class="section-title">
+              <span data-i18n="experience.title"
+                >Development backed by operational experience.</span
+              >
+            </h2>
+          </div>
+          <p class="section-intro">
+            <span data-i18n="experience.intro"
+              >Software, automation, and technical problem solving in environments where people
+              depend on the result.</span
+            >
+          </p>
+        </div>
+        <div>
+          <article class="experience-item">
+            <div>
+              <p class="experience-employer">WeTeachIT</p>
+              <p class="experience-date">
+                <span data-i18n="role.assistant.dates">2025–Present</span>
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">
+                <span data-i18n="role.assistant.title">Programming Assistant &amp; Developer</span>
+              </h3>
+              <ul class="experience-list">
+                <li>
+                  <span data-i18n="role.assistant.0"
+                    >Develop internal full-stack systems with Flask, SQLite, and secure
+                    authentication.</span
+                  >
+                </li>
+                <li>
+                  <span data-i18n="role.assistant.1"
+                    >Review and debug Python, Java, and C# code, working with instructors on
+                    maintainable teaching tools.</span
+                  >
+                </li>
+                <li>
+                  <span data-i18n="role.assistant.2"
+                    >Built a modular Unity/C# toolchain with custom networking logic.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article class="experience-item">
+            <div>
+              <p class="experience-employer">Nielsen / Gracenote</p>
+              <p class="experience-date"><span data-i18n="role.nielsen.dates">2022–2023</span></p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">
+                <span data-i18n="role.nielsen.title">Schedule Editor</span>
+              </h3>
+              <ul class="experience-list">
+                <li>
+                  <span data-i18n="role.nielsen.0"
+                    >Automated metadata and TV scheduling workflows in data-heavy operational
+                    processes.</span
+                  >
+                </li>
+                <li>
+                  <span data-i18n="role.nielsen.1"
+                    >Validated Swedish TV and VOD data with providers and broadcasters, improving
+                    consistency through scripts.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article class="experience-item">
+            <div>
+              <p class="experience-employer">Cognizant</p>
+              <p class="experience-date"><span data-i18n="role.cognizant.dates">2018–2021</span></p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">
+                <span data-i18n="role.cognizant.title"
+                  >Exchange Administrator / Subject Matter Expert</span
+                >
+              </h3>
+              <ul class="experience-list">
+                <li>
+                  <span data-i18n="role.cognizant.0"
+                    >Managed hybrid Exchange environments and automated provisioning, queue
+                    handling, and reporting with PowerShell.</span
+                  >
+                </li>
+                <li>
+                  <span data-i18n="role.cognizant.1"
+                    >Built CLI tools that reduced reporting time from hours to minutes; supported
+                    global migration and retention work.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article class="experience-item">
+            <div>
+              <p class="experience-employer">Tech Mahindra</p>
+              <p class="experience-date"><span data-i18n="role.mahindra.dates">2017–2018</span></p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-white">
+                <span data-i18n="role.mahindra.title"
+                  >Enterprise Support &amp; Automation Specialist</span
+                >
+              </h3>
+              <ul class="experience-list">
+                <li>
+                  <span data-i18n="role.mahindra.0"
+                    >Delivered second-line support for VPN, Lotus Notes, and Active Directory.</span
+                  >
+                </li>
+                <li>
+                  <span data-i18n="role.mahindra.1"
+                    >Automated account provisioning and VPN recovery workflows with scripts.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <p class="experience-other">
+          <span data-i18n="experience.other"
+            >Earlier and additional experience: onsite IT support at InfoCare (2023), and digital
+            production as founder of Royal Hand Studios (2014–2015).</span
+          >
+        </p>
+      </section>
+
+      <section id="education" class="section-shell about-section" aria-labelledby="education-title">
+        <div>
+          <p class="eyebrow"><span data-i18n="education.eyebrow">Education &amp; tools</span></p>
+          <h2 id="education-title" class="section-title">
+            <span data-i18n="education.title">A foundation in software development.</span>
+          </h2>
+        </div>
+        <div class="space-y-5">
+          <div class="card-panel space-y-3">
+            <h3 class="text-lg font-semibold text-white">
+              <span data-i18n="education.degree"
+                >Higher Vocational Diploma in Software Development</span
+              >
+            </h3>
+            <p>
+              <span data-i18n="education.school"
+                >MÖLK Yrkeshögskola / Skill Academy · 2023–2025 · 400 YH credits</span
+              >
+            </p>
+            <p>
+              <span data-i18n="education.focus"
+                >Object-oriented programming, databases, networking, data structures, algorithms,
+                and agile development. Distinction in 12 of 14 courses.</span
+              >
+            </p>
+            <p>
+              <span data-i18n="education.thesis"
+                >Capstone project: a modular multiplayer system in C#.</span
+              >
             </p>
           </div>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-xl border border-neutral-800 bg-neutral-900/60 p-4 space-y-2">
-              <p class="text-sm font-semibold text-neutral-100" data-i18n="about.strengths.title">Strengths</p>
-              <ul class="space-y-2 text-sm text-neutral-300">
-                <li data-i18n="about.strengths.fast">Rapid experiments & MVPs with clear KPIs.</li>
-                <li data-i18n="about.strengths.translate">Translate complex tech into decision-ready narratives.</li>
-                <li data-i18n="about.strengths.mentorship">Mentorship, pairing, and consistent code reviews.</li>
-              </ul>
-            </div>
-            <div class="rounded-xl border border-neutral-800 bg-neutral-900/60 p-4 space-y-2">
-              <p class="text-sm font-semibold text-neutral-100" data-i18n="about.tools.title">Tools</p>
-              <ul class="space-y-2 text-sm text-neutral-300">
-                <li data-i18n="about.tools.devops">GitHub Actions, Azure/AWS, Docker & k8s.</li>
-                <li data-i18n="about.tools.databases">Supabase, PostgreSQL, Redis, OpenSearch.</li>
-                <li data-i18n="about.tools.product">Figma, Linear, Notion for clear traceability.</li>
-              </ul>
-            </div>
+          <div
+            class="skill-list"
+            role="group"
+            aria-label="Technologies"
+            data-i18n-aria="skills.label"
+          >
+            <span>Python</span><span>C#</span><span>JavaScript</span><span>SQL</span
+            ><span>Flask</span><span>SQLite</span><span>PowerShell</span><span>Unity</span
+            ><span>Git</span><span>Docker</span><span>REST APIs</span><span>CI/CD</span>
           </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section" aria-labelledby="contact-title">
+        <div class="contact-copy">
+          <p class="eyebrow"><span data-i18n="contact.eyebrow">Contact</span></p>
+          <h2 id="contact-title" class="section-title">
+            <span data-i18n="contact.title">Let’s talk engineering.</span>
+          </h2>
+          <p>
+            <span data-i18n="contact.intro"
+              >Have a software engineering role or a technical problem to discuss? Tell me about the
+              team, the system, and what you need to build.</span
+            >
+          </p>
+          <a class="text-link contact-email" href="mailto:tobias_berntsson@hotmail.com"
+            >tobias_berntsson@hotmail.com</a
+          >
+          <div class="contact-links">
+            <a class="text-link" href="https://www.linkedin.com/in/tobias-berntsson/">LinkedIn ↗</a
+            ><a class="text-link" href="https://github.com/Tobernt">GitHub ↗</a>
+          </div>
+          <p class="contact-note" id="contact-help">
+            <span data-i18n="contact.how"
+              >This form prepares an email draft on your device. You review and send it in your
+              email app. Nothing is stored on this website.</span
+            >
+          </p>
+        </div>
+        <form action="mailto:tobias_berntsson@hotmail.com" method="post" enctype="text/plain" id="contact-form" class="contact-form" aria-describedby="contact-help">
+          <fieldset>
+            <legend><span data-i18n="form.legend">Your details</span></legend>
+            <p class="form-note">
+              <span data-i18n="form.required"
+                >Name, email, topic, message, and permission to reply are required.</span
+              >
+            </p>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="contact-name"><span data-i18n="form.name">Your name</span></label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                  maxlength="200">
+              </div>
+              <div class="form-field">
+                <label for="contact-email"><span data-i18n="form.email">Your email</span></label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  maxlength="254">
+              </div>
+              <div class="form-field">
+                <label for="contact-website"
+                  ><span data-i18n="form.website">Your website (optional)</span></label
+                >
+                <input
+                  id="contact-website"
+                  name="website"
+                  type="url"
+                  autocomplete="url"
+                  maxlength="200">
+              </div>
+              <div class="form-field">
+                <label for="contact-phone"
+                  ><span data-i18n="form.phone">Your phone number (optional)</span></label
+                >
+                <input
+                  id="contact-phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  maxlength="200">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="contact-topic"
+                ><span data-i18n="form.topic">What would you like to discuss?</span></label
+              >
+              <select id="contact-topic" name="topic" required>
+                <option value="" data-i18n="form.choose">Choose a topic</option>
+                <option value="Engineering role" data-i18n="form.role">
+                  Software engineering role
+                </option>
+                <option value="Project collaboration" data-i18n="form.project">
+                  Project collaboration
+                </option>
+                <option value="Other" data-i18n="form.other">Something else</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="contact-message"><span data-i18n="form.message">Your message</span></label
+              ><textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                maxlength="3000"
+                required
+              ></textarea>
+            </div>
+            <div class="checkbox-field">
+              <input id="contact-permission" name="permission" type="checkbox" required><label
+                for="contact-permission"
+                ><span data-i18n="form.permission"
+                  >You may reply using the contact details I provide.</span
+                ></label
+              >
+            </div>
+            <button type="submit" class="cta-button-primary">
+              <span data-i18n="form.submit">Prepare email</span> <span aria-hidden="true">↗</span>
+            </button>
+            <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+            <a id="contact-draft" class="text-link" hidden
+              ><span data-i18n="form.open">Open email draft</span></a
+            >
+            <noscript
+              ><p>
+                Use the email link to contact me directly. The draft builder requires JavaScript.
+              </p></noscript
+            >
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>
+          <strong>Tobias Berntsson</strong><br><span data-i18n="footer.subtitle"
+            >Software engineering · Backend · Automation</span
+          >
+        </p>
+        <div class="footer-links">
+          <a href="mailto:tobias_berntsson@hotmail.com"
+            ><span data-i18n="footer.email">Email Tobias</span></a
+          >
+          <a href="https://www.linkedin.com/in/tobias-berntsson/">LinkedIn</a>
+          <a href="https://github.com/Tobernt">GitHub</a>
+          <a href="https://github.com/Tobernt/SoftwareEngineerPortfolio"
+            ><span data-i18n="footer.source">Website source</span></a
+          >
         </div>
       </div>
-    </section>
-
-    <section id="experience" class="section-shell">
-      <div class="flex flex-col gap-6">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <p class="eyebrow" data-i18n="experience.eyebrow">Experience</p>
-            <h2 class="text-3xl font-bold text-white" data-i18n="experience.title">Roles & outcomes</h2>
-            <p class="text-sm text-neutral-400" data-i18n="experience.subtitle">Measurable effects on delivery flow, cost, and quality.</p>
-          </div>
-          <a class="text-sm text-blue-400 hover:text-blue-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300" href="gallery.html" data-i18n="experience.cta">See UI examples</a>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.assistant.title">Programming Assistant &amp; Developer, WeTeachIT</span>
-              <span data-i18n="experience.roles.assistant.dates">2025–Present</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.assistant.one">Review and debug student code in Python, Java, and C# while coaching toward better structure.</li>
-              <li data-i18n="experience.roles.assistant.two">Build internal full-stack tools in Flask and SQLite with secure authentication.</li>
-              <li data-i18n="experience.roles.assistant.three">Develop modular multiplayer framework in Unity/C# with custom networking.</li>
-              <li data-i18n="experience.roles.assistant.four">Collaborate with instructors to create scalable, maintainable teaching flows.</li>
-            </ul>
-          </article>
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.editor.title">Schedule Editor (Remote), Nielsen / Gracenote</span>
-              <span data-i18n="experience.roles.editor.dates">2022–2023</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.editor.one">Automated metadata and TV schedules, reducing manual work.</li>
-              <li data-i18n="experience.roles.editor.two">Ensured data quality for Swedish TV and VOD through supplier validation.</li>
-              <li data-i18n="experience.roles.editor.three">Created scripts that improved delivery times and consistency.</li>
-            </ul>
-          </article>
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.exchange.title">Exchange Administrator / SME (Remote), Cognizant</span>
-              <span data-i18n="experience.roles.exchange.dates">2018–2021</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.exchange.one">Managed hybrid Microsoft Exchange environments (2010–2019 and Exchange Online).</li>
-              <li data-i18n="experience.roles.exchange.two">Automated provisioning, queue handling, and reporting with PowerShell.</li>
-              <li data-i18n="experience.roles.exchange.three">Built CLI tools that reduced reporting time from hours to minutes.</li>
-              <li data-i18n="experience.roles.exchange.four">Supported compliance, retention, and migrations in global teams.</li>
-            </ul>
-          </article>
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.enterprise.title">Enterprise Support &amp; Automation Specialist, Tech Mahindra</span>
-              <span data-i18n="experience.roles.enterprise.dates">2017–2018</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.enterprise.one">Delivered Tier 2 support for VPN, Lotus Notes, and Active Directory.</li>
-              <li data-i18n="experience.roles.enterprise.two">Automated account provisioning and VPN resets.</li>
-              <li data-i18n="experience.roles.enterprise.three">Ranked top 3 in a 50+ person team for problem-solving speed.</li>
-            </ul>
-          </article>
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.onsite.title">Onsite Technician, InfoCare</span>
-              <span data-i18n="experience.roles.onsite.dates">2023</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.onsite.one">Delivered on-site IT support and hardware diagnostics in Sweden.</li>
-              <li data-i18n="experience.roles.onsite.two">Coordinated with vendors and users to minimize downtime.</li>
-            </ul>
-          </article>
-          <article class="card-panel">
-            <div class="flex items-center justify-between text-sm text-neutral-400">
-              <span class="font-semibold text-neutral-200" data-i18n="experience.roles.producer.title">Producer / Founder, Royal Hand Studios</span>
-              <span data-i18n="experience.roles.producer.dates">2014–2015</span>
-            </div>
-            <ul class="mt-3 space-y-2 text-neutral-300 text-sm">
-              <li data-i18n="experience.roles.producer.one">Led digital productions; received Culture Award 2014 and nominated Entrepreneur of the Year 2015.</li>
-              <li data-i18n="experience.roles.producer.two">Handled project management, client relations, and delivery of creative media work.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="section-shell">
-      <div class="grid gap-8 lg:grid-cols-2 lg:items-start">
-        <div class="space-y-3">
-          <p class="eyebrow" data-i18n="education.eyebrow">Education & skills</p>
-          <h2 class="text-3xl font-bold text-white" data-i18n="education.title">Lifelong learning</h2>
-          <p class="text-neutral-300" data-i18n="education.subtitle">I keep the toolbox current and document learnings so the team never has to guess.</p>
-          <div class="card-panel">
-            <p class="text-sm font-semibold text-neutral-100" data-i18n="education.degree">Higher Vocational Degree – Software Development</p>
-            <p class="text-sm text-neutral-400" data-i18n="education.school">MÖLK Vocational College, Linköping • 400/400 credits</p>
-            <p class="mt-2 text-sm text-neutral-300" data-i18n="education.focus">Focus on OOP, agile teams, databases, GUI design, and algorithms. Distinction in 12 of 14 courses.</p>
-            <p class="mt-2 text-sm text-neutral-300" data-i18n="education.project">Thesis: modular multiplayer system in C#.</p>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-3">
-            <p class="text-sm font-semibold text-neutral-100" data-i18n="education.stack.title">Tech stack</p>
-            <div class="flex flex-wrap gap-2 text-xs text-emerald-200">
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">Python</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">C#</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">JavaScript</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">Flask</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">Tailwind</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">Unity</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">SQL</span>
-              <span class="rounded-full border border-emerald-400/50 px-3 py-1">PowerShell</span>
-            </div>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-3">
-            <p class="text-sm font-semibold text-neutral-100" data-i18n="education.tools.title">Tools & methods</p>
-            <div class="grid grid-cols-2 gap-3 text-sm text-neutral-300">
-              <span data-i18n="education.tools.cicd">CI/CD & DevOps</span>
-              <span data-i18n="education.tools.design">Design systems</span>
-              <span data-i18n="education.tools.agile">Agile practices</span>
-              <span data-i18n="education.tools.observability">Observability</span>
-              <span data-i18n="education.tools.audit">DX audits</span>
-              <span data-i18n="education.tools.ab">A/B testing</span>
-            </div>
-          </div>
-          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-3">
-            <p class="text-sm font-semibold text-neutral-100" data-i18n="education.frontend.title">Frontend & architecture</p>
-            <ul class="space-y-2 text-sm text-neutral-300">
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.react">React &mdash; Build UI with components</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.nextjs">Next.js &mdash; React + server + routing + performance</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.tailwind">Tailwind &mdash; CSS classes for building UI directly</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.designsystem">Design System &mdash; Unified UI rules and ready-made components</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.headlesscms">Headless CMS &mdash; Content via API, not bound to HTML</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.graphql">GraphQL &mdash; Query for exact data</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.oauth">OAuth &mdash; Secure login via tokens</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.nx">NX &mdash; Structure for large projects</span></li>
-              <li class="flex items-center gap-2"><span class="text-emerald-400">&#10004;</span> <span data-i18n="education.frontend.testing">Vitest/Cypress &mdash; Testing</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section-shell">
-      <div class="flex flex-col gap-6">
-        <div class="flex items-center justify-between gap-4 flex-wrap">
-          <div>
-            <p class="eyebrow" data-i18n="projects.eyebrow">Projects</p>
-            <h2 class="text-3xl font-bold text-white" data-i18n="projects.title">Selected cases</h2>
-            <p class="text-sm text-neutral-400" data-i18n="projects.subtitle">Cases with both outcomes and code notes.</p>
-          </div>
-          <a class="text-sm text-blue-400 hover:text-blue-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300" href="gallery.html" data-i18n="projects.cta">More UI inspiration</a>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <article class="card-panel space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold text-white" data-i18n="projects.items.video.title">AI Video Generator</h3>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="projects.items.video.tag">Automation</span>
-            </div>
-            <p class="text-sm text-neutral-300" data-i18n="projects.items.video.summary">AI-driven video pipeline with finely tuned metadata, storyboards, and voice-over.</p>
-            <p class="text-xs text-neutral-400" data-i18n="projects.items.video.stack">Stack: Python, Flask, Tailwind</p>
-            <p class="text-sm text-emerald-200" data-i18n="projects.items.video.result">Outcome: Shorter production cycles and more consistent deliveries.</p>
-          </article>
-          <article class="card-panel space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold text-white" data-i18n="projects.items.trading.title">Day Trading App</h3>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="projects.items.trading.tag">Realtime</span>
-            </div>
-            <p class="text-sm text-neutral-300" data-i18n="projects.items.trading.summary">Automated strategy that adapts to trend and call-sign shifts with notifications.</p>
-            <p class="text-xs text-neutral-400" data-i18n="projects.items.trading.stack">Stack: JavaScript, Supabase, React</p>
-            <p class="text-sm text-emerald-200" data-i18n="projects.items.trading.result">Outcome: Faster signal distribution and optimized costs.</p>
-          </article>
-          <article class="card-panel space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold text-white" data-i18n="projects.items.multiplayer.title">Multiplayer Game Architecture</h3>
-              <span class="pill border-emerald-500/40 bg-emerald-500/10 text-emerald-100" data-i18n="projects.items.multiplayer.tag">Scale</span>
-            </div>
-            <p class="text-sm text-neutral-300" data-i18n="projects.items.multiplayer.summary">Modular full-stack system with Unity tooling and a custom low-latency network stack.</p>
-            <p class="text-xs text-neutral-400" data-i18n="projects.items.multiplayer.stack">Stack: C#, Unity, SignalR, Redis</p>
-            <p class="text-sm text-emerald-200" data-i18n="projects.items.multiplayer.result">Outcome: Fewer disconnects and a smoother player experience.</p>
-          </article>
-          <article class="card-panel space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold text-white" data-i18n="projects.items.android.title">Android Incremental Game</h3>
-              <span class="pill border-neutral-700" data-i18n="projects.items.android.tag">Mobile</span>
-            </div>
-            <p class="text-sm text-neutral-300" data-i18n="projects.items.android.summary">Mobile game with economy loops, analytics, and local storage.</p>
-            <p class="text-xs text-neutral-400" data-i18n="projects.items.android.stack">Stack: Flutter, SQLite</p>
-            <p class="text-sm text-emerald-200" data-i18n="projects.items.android.result">Outcome: Iterative UI testing improved retention.</p>
-          </article>
-          <article class="card-panel space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-semibold text-white" data-i18n="projects.items.tailwind.title">Tailwind &amp; React Job Application</h3>
-              <span class="pill border-blue-400/40 bg-blue-500/10 text-blue-100" data-i18n="projects.items.tailwind.tag">Frontend</span>
-            </div>
-            <p class="text-sm text-neutral-300" data-i18n="projects.items.tailwind.summary">This portfolio project built in Tailwind and React to present skills and cases for applications.</p>
-            <p class="text-xs text-neutral-400" data-i18n="projects.items.tailwind.stack">Stack: React, Tailwind CSS</p>
-            <p class="text-sm text-emerald-200" data-i18n="projects.items.tailwind.result">Outcome: Fast prototype showing component library, UI polish, and responsiveness.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="contact" class="py-section">
-      <div class="rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 to-neutral-950 px-8 py-10 shadow-xl shadow-blue-500/20">
-        <div class="space-y-4">
-          <p class="eyebrow" data-i18n="contact.eyebrow">UI gallery</p>
-          <h2 class="text-3xl font-bold text-white" data-i18n="contact.title">Ready to start a project?</h2>
-          <p class="text-neutral-300" data-i18n="contact.subtitle">Book a walkthrough of your challenges or request a small prototype. I respond as soon as possible.</p>
-          <div class="flex flex-wrap gap-3">
-            <a class="cta-button-primary" href="mailto:tobias_berntsson@hotmail.com" data-i18n="contact.ctaPrimary">Book a walkthrough</a>
-            <a class="cta-button-ghost" href="gallery.html" data-i18n="contact.ctaSecondary">Explore solutions in the gallery</a>
-          </div>
-          <div class="flex flex-wrap gap-3 text-xs text-neutral-400">
-            <span class="pill border-emerald-400/60 bg-emerald-400/10 text-emerald-100" data-i18n="contact.tag.workshop">Available for workshops</span>
-            <span class="pill border-blue-400/60 bg-blue-500/10 text-blue-100" data-i18n="contact.tag.response">Replying ASAP</span>
-            <span class="pill" data-i18n="contact.tag.demo">Includes recorded demo</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div data-site-footer></div>
-</body>
+    </footer>
+  </body>
 </html>

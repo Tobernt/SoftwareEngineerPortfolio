@@ -3,7 +3,12 @@ const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './gallery.html', './src/**/*.{html,js,ts,jsx,tsx}', './assets/**/*.{js,ts}'],
+  content: [
+    './index.html',
+    './gallery.html',
+    './src/**/*.{html,js,ts,jsx,tsx}',
+    './assets/**/*.{js,ts}',
+  ],
   theme: {
     extend: {
       container: {
@@ -12,16 +17,16 @@ module.exports = {
       },
       colors: {
         neutral: {
-          50: '#eef1f6',
-          100: '#c9d0da',
-          200: '#9aa5b5',
-          300: '#6b768d',
-          400: '#475169',
-          500: '#353d4d',
-          600: '#292f3d',
-          700: '#1f2430',
-          800: '#181c25',
-          900: '#11131a',
+          50: '#f8fafc',
+          100: '#e2e8f0',
+          200: '#cbd5e1',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#94a3b8',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#111827',
           950: '#0c0d11',
         },
         accent: {
@@ -42,9 +47,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['"Inter"', '"Manrope"', ...defaultTheme.fontFamily.sans],
-        display: ['"Space Grotesk"', '"Inter"', ...defaultTheme.fontFamily.sans],
-        mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
+        sans: ['"Segoe UI"', ...defaultTheme.fontFamily.sans],
+        display: ['"Segoe UI Variable Display"', '"Segoe UI"', ...defaultTheme.fontFamily.sans],
+        mono: ['Consolas', ...defaultTheme.fontFamily.mono],
       },
       spacing: {
         gutter: '1.25rem',
